@@ -131,3 +131,24 @@ export const loadVideo = (src) => {
     }
   })
 }
+
+/**
+ * loading图片
+ * @param {String} src 图片链接
+ */
+export const loadImage = (src) => {
+  return new Promise((resolve, reject) => {
+    const img = document.createElement('img')
+    img.src = src
+    img.crossOrigin = 'Anonymous'
+    img.onload = function() {
+      resolve({
+        width: img.width,
+        height: img.height
+      })
+    }
+    img.onerror = function() {
+      reject()
+    }
+  })
+}
