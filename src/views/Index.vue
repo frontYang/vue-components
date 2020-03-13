@@ -41,7 +41,8 @@ export default {
         },
         {
           label: '鼠标移入图片内 自动播放对应视频',
-          checked: false
+          url: '/#/common/videoplay',
+          checked: true
         }
       ]
     }

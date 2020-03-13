@@ -111,3 +111,23 @@ export const getResult = (range, weekData, Vue) => {
   const allTimeData = getAllTime(numArr)
   return allTimeData
 }
+
+/**
+ * loading 视频
+ * @param {String} 视频链接
+ */
+export const loadVideo = (src) => {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video')
+    video.src = src
+    video.addEventListener('canplay', function() {
+      resolve({
+        width: this.videoWidth,
+        height: this.videoWidth
+      })
+    })
+    video.onerror = function() {
+      reject()
+    }
+  })
+}
