@@ -116,11 +116,12 @@ export default {
     left: 50%;
     margin: -20px 0 0 -20px;
   }
-  .el-icon-video{
+  .el-icon-video-play{
     font-size: 40px;
     position: absolute;
     top: 50%;
     left: 50%;
+    color: #fff;
     transform: translate(-50%, -50%);
   }
 }
