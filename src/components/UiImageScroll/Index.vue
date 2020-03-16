@@ -16,19 +16,13 @@
 </template>
 
 <script>
-const timmer = null
-function scroll(s, t, obj) {
-  const sp = 10
-  let cont = Number.parseInt(t / sp)
-  const oneLong = s / cont
-  const timer = setInterval(() => {
-    if (cont > 0) {
-      cont--
-      obj.style.marginTop = `-${oneLong}px`
-    } else {
-      clearInterval(timer)
-    }
-  }, sp)
+let timmer = null
+function scroll(top, item) {
+  console.log(item.offsetTop, item.offsetHeight)
+
+  setInterval(() => {
+    console.log(item.offsetTop)
+  }, 1000)
 }
 
 export default {
@@ -37,36 +31,34 @@ export default {
       list: [
         {
           image: '//dummyimage.com/320x600'
-        },
-        {
-          image: '//dummyimage.com/320x500'
         }
       ]
     }
   },
+
   components: {
 
   },
+
   mounted() {},
+
   methods: {
     onMouseenter(index, item) {
       if (timmer) { clearTimeout(timmer) }
-
-      // timmer = setTimeout(() => {
-      const itemObj = document.querySelectorAll('.image-item')[index]
-      const imgObj = itemObj.querySelector('img')
-      scroll(20, 500 - 240, imgObj)
-
-      // itemObj.className = 'image-item slidein'
-      // imgObj.offsetTop = `-${500}`
-      // }, 1000)
+      timmer = setTimeout(() => {
+        const itemObj = document.querySelectorAll('.image-item')[index]
+        const imgObj = itemObj.querySelector('img')
+        // console.log(itemObj.offsetTop, imgObj.offsetTop)
+        scroll(0, imgObj)
+      }, 1000)
     },
     onMouseleave(index, item) {
       // const itemObj = document.querySelectorAll('.image-item')[index]
       // itemObj.className = 'image-item'
-      const itemObj = document.querySelectorAll('.image-item')[index]
-      const imgObj = itemObj.querySelector('img')
-      imgObj.style.marginTop = 0
+      // const itemObj = document.querySelectorAll('.image-item')[index]
+      // const imgObj = itemObj.querySelector('img')
+      // scroll(0, imgObj)
+      // imgObj.style.marginTop = 0
     }
   }
 }

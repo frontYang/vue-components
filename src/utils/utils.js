@@ -152,3 +152,80 @@ export const loadImage = (src) => {
     }
   })
 }
+
+/**
+ * 多级多选联动————增加check属性
+ * @param {Array} list 数组
+ * @param {Object} Vue vue示例
+ */
+export const computeChild = (list, prop, Vue) => {
+  list.forEach(item => {
+    if (item[prop.children] && item[prop.children].length) {
+      const child = item[prop.children]
+      if (child.every(ret => ret[prop.check])) {
+        Vue.$set(item, [prop.check], true)
+      } else {
+        Vue.$set(item, [prop.check], false)
+      }
+      child && computeChild(child, Vue)
+    }
+  })
+}
+
+/**
+ * 多级多选联动————筛选已选
+ * @param { Array } list
+ * @param {*} value
+ */
+export const getNameOfData = (list, prop, value) => {
+  let i = -1
+  const len = list.length
+  let homeItem = {}
+
+  while (++i < len) {
+    const item = list[i]
+
+    if (item[prop.value] === value) {
+      homeItem = item
+      break
+    } else if (item[prop.children] && item[prop.children].length) {
+      const res = getNameOfData(item[prop.children], prop, value)
+      if (res[prop.value]) { return res }
+    }
+  }
+
+  return homeItem
+}
+
+/**
+ * 多级多选联动————清空全部
+ * @param {Array} list
+ * @param {Object} Vue vue示例
+ */
+export const clearTagOfData = (list, prop, Vue) => {
+  let i = -1
+  const len = list.length
+  while (++i < len) {
+    const item = list[i]
+    if (item[prop.children] && item[prop.children].length) {
+      clearTagOfData(item[prop.children], Vue)
+    }
+    Vue.$set(item, 'check', false)
+  }
+}
+
+/**
+ * 多级多选联动————筛选选中
+ * @param { Array } list
+ * @param {*} arr
+ */
+export const findCheck = (list, prop, arr = []) => {
+  list.forEach(ret => {
+    if (ret.check) {
+      arr.push(ret)
+    } else if (ret[prop.children] && ret[prop.children].length !== 0) {
+      findCheck(ret[prop.children], arr)
+    }
+  })
+  return arr
+}

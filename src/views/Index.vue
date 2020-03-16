@@ -29,7 +29,8 @@ export default {
         },
         {
           label: '下拉链接预览h5页面',
-          checked: false
+          url: '/#/common/selectdrop',
+          checked: true
         },
         {
           label: 'h5可视化网站',
