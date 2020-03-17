@@ -17,11 +17,11 @@
     </div>
     <div class="cascader-result" v-if="!hideResult">
       <select-item
-        v-if="value.length"
+        v-if="selectedData.length"
         title="已选"
         clear
         @on-clear="clearTag">
-        <div v-for="item in value" :key="item[prop.id]" class="pop-tip">
+        <div v-for="item in selectedData" :key="item[prop.id]" class="pop-tip">
           <el-tag
             :name="item[prop.value]"
             closable
@@ -38,6 +38,7 @@
 import SelectItem from './SelectItem'
 import SelectBox from './SelectBox'
 export default {
+  name: 'cascader',
   props: {
     // 已选
     value: {
@@ -76,7 +77,8 @@ export default {
   },
   data() {
     return {
-      resource: []
+      resource: [],
+      newData: []
     }
   },
   components: {
@@ -84,9 +86,16 @@ export default {
     'select-box': SelectBox
   },
   computed: {
+    selectedData() {
+      return this.$utils.findCheck(this.newData, this.prop)
+    }
   },
   watch: {
-    data(nVal) {
+    selectedData() {
+      const selectedIdArr = this.selectedData.map(v => v.id)
+      this.$emit('input', selectedIdArr)
+    },
+    newData(nVal) {
       if (nVal && nVal.length) {
         this.updateResource()
       } else {
@@ -95,15 +104,20 @@ export default {
     }
   },
   created() {
+    this.newData = this.$utils.selectCheck({
+      data: this.data,
+      selected: this.value,
+      prop: this.prop
+    })
     this.updateResource()
   },
   methods: {
     updateResource() {
       this.resource = []
       this.resource.push({
-        data: this.data,
-        current: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.value] : '',
-        id: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.id] : '',
+        data: this.newData,
+        current: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.value] : '',
+        id: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.id] : '',
         level: 1,
         title: this.title[0]
       })
@@ -120,10 +134,10 @@ export default {
       }
 
       if (id) {
-        const item = this.$utils.getIdOfData(this.data, this.prop, id)
+        const item = this.$utils.getIdOfData(this.newData, this.prop, id)
         data = item[this.prop.children]
       } else {
-        data = this.data
+        data = this.newData
       }
       setAllChecked(data, check)
     },
@@ -136,22 +150,22 @@ export default {
       this.selectFn({
         check,
         id,
-        list: this.data
+        list: this.newData
       })
     },
 
     // 删除
     handleClose(id) {
-      const data = this.$utils.getIdOfData(this.data, this.prop, id)
+      const data = this.$utils.getIdOfData(this.newData, this.prop, id)
       if (data[this.prop.children] && data[this.prop.children].length) {
-        this.selectFn({ list: this.data, check: false, id: data[this.prop.id] })
+        this.selectFn({ list: this.newData, check: false, id: data[this.prop.id] })
       } else {
         this.$set(data, this.prop.check, false)
       }
     },
     // 清除
     clearTag() {
-      this.$utils.clearTagOfData(this.data, this.prop, this)
+      this.$utils.clearTagOfData(this.newData, this.prop, this)
     },
 
     pushChild(params) {
@@ -163,8 +177,8 @@ export default {
 
       this.resource.push({
         data: item[this.prop.children],
-        current: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.value] : '',
-        id: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.id] : '',
+        current: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.value] : '',
+        id: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.id] : '',
         level: level + 1,
         title: this.title[level] || item[this.prop.value]
       })

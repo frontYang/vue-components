@@ -1,6 +1,6 @@
 <template>
 	<div class="page page-index">
-		<p>欢迎！</p>
+		<h2>todoList</h2>
     <p v-for="(item, index) in todoList" :key="index">
       <el-checkbox :disabled="true" :value="item.checked"></el-checkbox>
       <el-link type="primary" :disabled="!item.checked" :href="item.url">{{item.label}}</el-link>
@@ -35,6 +35,10 @@ export default {
         },
         {
           label: 'h5可视化网站',
+          checked: false
+        },
+        {
+          label: '自定义搜索下拉',
           checked: false
         },
         {

@@ -228,3 +228,29 @@ export const findCheck = (list, prop, arr = []) => {
   })
   return arr
 }
+
+/**
+ * 多级多选联动———选中已选
+ */
+export const selectCheck = ({ data, selected, prop, check }) => {
+  data.forEach((item) => {
+    let checked = false
+    if (check !== undefined) {
+      checked = check
+    } else {
+      checked = selected.includes(item.id)
+    }
+
+    item[prop.check] = checked
+
+    if (item[prop.children]) {
+      selectCheck({
+        data: item[prop.children],
+        selected: selected,
+        prop,
+        check: checked
+      })
+    }
+  })
+  return data
+}

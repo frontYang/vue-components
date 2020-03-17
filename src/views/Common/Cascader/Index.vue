@@ -1,14 +1,15 @@
 <template>
   <div class="page">
     <ui-cascader
-      v-model="selectedData"
+      ref="cascader"
+      v-model="selectedIdArr"
       :data="cityData"
       :title="['省份']"
     />
-    <p>结果数据：</p>
+    <p>选中数据：</p>
     <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{selectedData}}</pre>
-    <p>提交id：</p>
-    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{JSON.stringify(selectedData.map(v => v.id))}}</pre>
+    <p>选中id:</p>
+    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{JSON.stringify(selectedIdArr)}}</pre>
   </div>
 </template>
 
@@ -20,25 +21,20 @@ export default {
   data() {
     return {
       cityData: cityData,
-      prop: {
-        check: 'check',
-        children: 'children',
-        id: 'id',
-        value: 'value'
-      }
-      // selectedData: []
+      selectedData: [],
+      selectedIdArr: [11, 12, 13, 14, 15, 21, 22]
     }
   },
   components: {
     'ui-cascader': UiCascader
   },
   computed: {
-    selectedData() {
-      return this.$utils.findCheck(this.cityData, this.prop)
-    }
+
   },
-  mounted() {},
-  methods: {
+  watch: {
+    selectedIdArr() {
+      this.selectedData = this.$refs['cascader'].selectedData
+    }
   }
 }
 </script>
