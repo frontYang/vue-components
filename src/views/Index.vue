@@ -21,7 +21,8 @@ export default {
         },
         {
           label: '级联多选__样式一',
-          checked: false
+          url: '/#/common/cascader',
+          checked: true
         },
         {
           label: '级联多选__样式二',
@@ -47,15 +48,6 @@ export default {
         }
       ]
     }
-  },
-  components: {
-
-  },
-  methods: {
-
-  },
-  mounted() {
-
   }
 }
 </script>

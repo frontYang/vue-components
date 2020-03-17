@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-cascader scrollbar">
+  <div class="ui-cascader scrollbar f-flex">
     <div class="cascader-box f-flex">
       <div class="cascader-item" v-for="(item, index) in resource" :key="index">
         <select-item :title="item.title">
@@ -26,6 +26,7 @@
             :name="item[prop.value]"
             closable
             class="tag-item"
+            @close="handleClose(item[prop.id])"
           >{{item[prop.value]}}</el-tag>
         </div>
       </select-item>
@@ -102,40 +103,50 @@ export default {
       this.resource.push({
         data: this.data,
         current: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.value] : '',
+        id: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.id] : '',
         level: 1,
         title: this.title[0]
       })
     },
 
-    // 全选
-    selectAll({ level, check, cat }) {
-      const index = level - 2
-      let current = index > -1 ? this.resource[index].current : ''
-      cat && (current = cat)
+    selectFn({ list, check = true, id = '' }) {
       let data
       // 无限递归
       const setAllChecked = (data, check) => {
         data.forEach(ret => {
-          if (ret.children && ret.children.length) { setAllChecked(ret.children, check) }
-          this.$set(ret, 'check', check)
+          if (ret[this.prop.children] && ret[this.prop.children].length) { setAllChecked(ret[this.prop.children], check) }
+          this.$set(ret, this.prop.check, check)
         })
       }
-      if (current) {
-        const item = this.$utils.getNameOfData(this.data, this.prop, current)
-        data = item.children
+
+      if (id) {
+        const item = this.$utils.getIdOfData(this.data, this.prop, id)
+        data = item[this.prop.children]
       } else {
         data = this.data
       }
       setAllChecked(data, check)
     },
 
+    // 全选
+    selectAll({ level, check, cat }) {
+      const index = level - 2
+      let id = index > -1 ? this.resource[index].id : ''
+      cat && (id = cat)
+      this.selectFn({
+        check,
+        id,
+        list: this.data
+      })
+    },
+
     // 删除
-    handleClose(name) {
-      const data = this.$utils.getNameOfData(this.data, this.prop, name)
-      if (data.children && data.children.length) {
-        this.selectAll({ list: this.data, check: false, current: data[this.prop.value] })
+    handleClose(id) {
+      const data = this.$utils.getIdOfData(this.data, this.prop, id)
+      if (data[this.prop.children] && data[this.prop.children].length) {
+        this.selectFn({ list: this.data, check: false, id: data[this.prop.id] })
       } else {
-        this.$set(data, 'check', false)
+        this.$set(data, this.prop.check, false)
       }
     },
     // 清除
@@ -149,9 +160,11 @@ export default {
       if (level <= len - 1) {
         this.resource.splice(level, len - level)
       }
+
       this.resource.push({
         data: item[this.prop.children],
         current: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.value] : '',
+        id: this.value[this.value.length - 1] ? this.value[this.value.length - 1][this.prop.id] : '',
         level: level + 1,
         title: this.title[level] || item[this.prop.value]
       })
@@ -161,11 +174,37 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import '@/assets/styles/_common.scss';
-.cascader-box{
-  .cascader-item{
+
+.ui-cascader{
+  .cascader-result{
     flex: 1;
+  }
+  .cascader-box{
+    flex: 1;
+    min-width: 65%;
+    .cascader-item{
+      flex: 1;
+    }
+  }
+  .cascader-result{
+    .el-tag{
+      width: 94%;
+      margin: 8px 14px 0;
+      display: block;
+      font-size: 14px;
+      height: 28px;
+      position: relative;
+
+      .el-icon-close{
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+      }
+    }
   }
 }
 

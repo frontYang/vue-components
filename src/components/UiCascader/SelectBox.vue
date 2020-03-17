@@ -75,7 +75,7 @@ export default {
     }
   },
   mounted() {
-    this.$utils.computeChild(this.data, this)
+    this.$utils.computeChild(this.data, this.prop, this)
   },
   methods: {
     selectAll() {
@@ -90,7 +90,7 @@ export default {
       this.$emit('on-select', {
         check: !item[this.prop.check],
         level: this.level,
-        cat: item[this.prop.value]
+        cat: item[this.prop.id]
       })
     },
     itemIndeterminate(child) {

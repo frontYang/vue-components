@@ -5,6 +5,10 @@
       :data="cityData"
       :title="['省份']"
     />
+    <p>结果数据：</p>
+    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{selectedData}}</pre>
+    <p>提交id：</p>
+    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{JSON.stringify(selectedData.map(v => v.id))}}</pre>
   </div>
 </template>
 

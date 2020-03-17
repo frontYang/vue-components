@@ -167,7 +167,7 @@ export const computeChild = (list, prop, Vue) => {
       } else {
         Vue.$set(item, [prop.check], false)
       }
-      child && computeChild(child, Vue)
+      child && computeChild(child, prop, Vue)
     }
   })
 }
@@ -175,22 +175,21 @@ export const computeChild = (list, prop, Vue) => {
 /**
  * 多级多选联动————筛选已选
  * @param { Array } list
- * @param {*} value
+ * @param {*}  id
  */
-export const getNameOfData = (list, prop, value) => {
+export const getIdOfData = (list, prop, id) => {
   let i = -1
   const len = list.length
   let homeItem = {}
 
   while (++i < len) {
     const item = list[i]
-
-    if (item[prop.value] === value) {
+    if (item[prop.id] === id) {
       homeItem = item
       break
     } else if (item[prop.children] && item[prop.children].length) {
-      const res = getNameOfData(item[prop.children], prop, value)
-      if (res[prop.value]) { return res }
+      const res = getIdOfData(item[prop.children], prop, id)
+      if (res[prop.id]) { return res }
     }
   }
 
@@ -208,7 +207,7 @@ export const clearTagOfData = (list, prop, Vue) => {
   while (++i < len) {
     const item = list[i]
     if (item[prop.children] && item[prop.children].length) {
-      clearTagOfData(item[prop.children], Vue)
+      clearTagOfData(item[prop.children], prop, Vue)
     }
     Vue.$set(item, 'check', false)
   }
@@ -224,7 +223,7 @@ export const findCheck = (list, prop, arr = []) => {
     if (ret.check) {
       arr.push(ret)
     } else if (ret[prop.children] && ret[prop.children].length !== 0) {
-      findCheck(ret[prop.children], arr)
+      findCheck(ret[prop.children], prop, arr)
     }
   })
   return arr
