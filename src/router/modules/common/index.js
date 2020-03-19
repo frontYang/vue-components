@@ -5,6 +5,7 @@ import VideoPlay from '@/views/Common/VideoPlay/Index'
 import ImageScroll from '@/views/Common/ImageScroll/Index'
 import SelectDrop from '@/views/Common/SelectDrop/Index'
 import Cascader from '@/views/Common/Cascader/Index'
+import TreeSearch from '@/views/Common/TreeSearch/Index'
 
 // 子路由
 export default {
@@ -53,6 +54,14 @@ export default {
       component: SelectDrop,
       meta: {
         title: '鼠标移入固定宽高标签内 图片自动滚动至底部'
+      }
+    },
+    {
+      path: '/common/treesearch',
+      name: 'treesearch',
+      component: TreeSearch,
+      meta: {
+        title: '树形数组下拉框搜索'
       }
     }
   ]

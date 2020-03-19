@@ -33,7 +33,30 @@ const formatWeektime = col => {
   return `${begin}~${end}`
 }
 
-const data = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'].map((ret, index) => {
+const data = (week = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日']) => {
+  return week.map((ret, index) => {
+    const children = (ret, row, max) => {
+      return createArr(max).map((t, col) => {
+        return {
+          check: false,
+          week: ret,
+          value: formatWeektime(col),
+          begin: formatWeektime(col).split('~')[0],
+          end: formatWeektime(col).split('~')[1],
+          row: row,
+          col: col
+        }
+      })
+    }
+    return {
+      value: ret,
+      row: index,
+      child: children(ret, index, 48)
+    }
+  })
+}
+
+/* const data = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'].map((ret, index) => {
   const children = (ret, row, max) => {
     return createArr(max).map((t, col) => {
       return {
@@ -52,6 +75,6 @@ const data = ['星期一', '星期二', '星期三', '星期四', '星期五', '
     row: index,
     child: children(ret, index, 48)
   }
-})
+}) */
 
 export default data

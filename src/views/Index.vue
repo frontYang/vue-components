@@ -29,26 +29,26 @@ export default {
           checked: false
         },
         {
+          label: '树形数组下拉框模糊搜索',
+          checked: true
+        },
+        {
           label: '下拉链接预览h5页面',
           url: '/#/common/selectdrop',
           checked: true
         },
         {
-          label: 'h5可视化网站',
-          checked: false
-        },
-        {
-          label: '自定义搜索下拉',
-          checked: false
+          label: '鼠标移入图片内 自动播放对应视频',
+          url: '/#/common/videoplay',
+          checked: true
         },
         {
           label: '鼠标移入固定宽高标签内 图片自动滚动至底部',
           checked: false
         },
         {
-          label: '鼠标移入图片内 自动播放对应视频',
-          url: '/#/common/videoplay',
-          checked: true
+          label: 'h5可视化网站',
+          checked: false
         }
       ]
     }

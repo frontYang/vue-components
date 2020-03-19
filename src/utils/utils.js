@@ -254,3 +254,99 @@ export const selectCheck = ({ data, selected, prop, check }) => {
   })
   return data
 }
+
+/**
+ * 树形数组模糊搜索————返回链式字符串数组
+ */
+export const findTreeStr = (data, prop, value) => {
+  if (!data || data.length <= 0) { return }
+
+  const fn = (item, value, first) => {
+    const newArr = []
+    item.forEach(inner => {
+      let str = first ? (first + ' / ') : ''
+      str += value + ' / ' + inner.value
+      newArr.push({
+        [prop.id]: inner[prop.id],
+        [prop.value]: inner[prop.value],
+        path_name: str,
+        [prop.check]: inner[prop.check],
+        pid: inner.pid,
+        index: inner.index,
+        [prop.children]: inner[prop.children]
+      })
+    })
+    return newArr
+  }
+
+  let arr = []
+
+  data.forEach(item => {
+    let str = value ? (value + ' / ') : ''
+    str += item.value
+
+    !value && arr.push({
+      [prop.id]: item[prop.id],
+      [prop.value]: item[prop.value],
+      path_name: str,
+      [prop.check]: item[prop.check],
+      pid: item.pid,
+      index: item.index,
+      [prop.children]: findTreeStr(item[prop.children], prop, str)
+    })
+    if (item[prop.children] && item[prop.children].length > 0) {
+      arr = arr.concat(...fn(item[prop.children], item.value, value))
+      const str = value ? (value + '/' + item.value) : item.value
+      arr = arr.concat(...findTreeStr(item[prop.children], prop, str))
+    }
+  })
+  return arr
+}
+
+/**
+ * 树状模糊搜索————返回树形数组，名称携带父级名称
+ */
+export const findTreeFuzzy = ({
+  val = '', // 搜索值
+  prop = { // key值
+    check: 'check',
+    children: 'children',
+    id: 'id',
+    value: 'value'
+  },
+  data = [], // 树形数组
+  pid = -1, // 父id
+  isStr = true // 是否返回拼接名称数组
+}) => {
+  if (val === '' || !data || data.length <= 0) { return }
+  const newarr = []
+  data.forEach((element, index) => {
+    if (element.value.indexOf(val) !== -1) {
+      newarr.push({
+        index,
+        pid: pid,
+        ...element
+      })
+    } else {
+      if (element[prop.children] && element[prop.children].length) {
+        const ab = findTreeFuzzy({
+          val,
+          prop,
+          data: element[prop.children],
+          pid: element[prop.id]
+        })
+        const obj = {
+          ...element,
+          pid: pid,
+          index,
+          children: ab
+        }
+        if (ab && ab.length) {
+          newarr.push(obj)
+        }
+      }
+    }
+  })
+  const result = isStr ? findTreeStr(newarr, prop) : newarr
+  return result
+}

@@ -8,7 +8,8 @@
 
 <script>
 import UiDragtime from '@/components/UiDragtime/Index'
-import weekData from '@/utils/weektime_data'
+import week from '@/utils/weektime_data'
+const weekData = week()
 
 export default {
   data() {
