@@ -96,7 +96,7 @@ export default {
       return this.$utils.findCheck({
         list: this.newData,
         prop: this.prop,
-        filter: 1
+        filter: this.isMultiFirst ? 0 : 1
       })
     }
   },
