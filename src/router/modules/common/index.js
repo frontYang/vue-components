@@ -29,7 +29,7 @@ export default {
       name: 'cascader',
       component: Cascader,
       meta: {
-        title: '时间拖拽'
+        title: '级联多选__样式一'
       }
     },
     {

@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <h1>全部多选</h1>
     <ui-cascader
       ref="cascader"
       v-model="selectedIdArr"
@@ -22,7 +23,8 @@ export default {
     return {
       cityData: cityData,
       selectedData: [],
-      selectedIdArr: [11, 12, 13, 14, 15, 21, 22]
+      selectedIdArr: []
+      // 11, 12, 13, 14, 15, 21, 22
     }
   },
   components: {

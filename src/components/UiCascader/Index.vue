@@ -109,6 +109,8 @@ export default {
       selected: this.value,
       prop: this.prop
     })
+  },
+  mounted() {
     this.updateResource()
   },
   methods: {
@@ -134,10 +136,10 @@ export default {
       }
 
       if (id) {
-        const item = this.$utils.getIdOfData(this.newData, this.prop, id)
+        const item = this.$utils.getIdOfData(list, this.prop, id)
         data = item[this.prop.children]
       } else {
-        data = this.newData
+        data = list
       }
       setAllChecked(data, check)
     },
@@ -145,7 +147,7 @@ export default {
     // 全选
     selectAll({ level, check, cat }) {
       const index = level - 2
-      let id = index > -1 ? this.resource[index].id : ''
+      let id = index > -1 ? this.resource[index][this.prop.id] : ''
       cat && (id = cat)
       this.selectFn({
         check,
@@ -174,7 +176,6 @@ export default {
       if (level <= len - 1) {
         this.resource.splice(level, len - level)
       }
-
       this.resource.push({
         data: item[this.prop.children],
         current: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.value] : '',
@@ -183,6 +184,7 @@ export default {
         title: this.title[level] || item[this.prop.value]
       })
       this.resource[level - 1].current = item[this.prop.value]
+      this.resource[level - 1].id = item[this.prop.id]
     }
   }
 }

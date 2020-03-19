@@ -25,10 +25,6 @@ export default {
           checked: true
         },
         {
-          label: '级联多选__样式二',
-          checked: false
-        },
-        {
           label: '树形数组下拉框模糊搜索',
           checked: true
         },
