@@ -1,10 +1,12 @@
 <template>
   <div class="page">
+    <h1>首层单选，子层多选</h1>
     <ui-cascader
       ref="cascader"
       v-model="selectedIdArr"
       :data="cityData"
       :title="['省份']"
+      :is-multi-first="false"
     />
     <p>选中数据：</p>
     <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{selectedData}}</pre>
@@ -23,7 +25,6 @@ export default {
       cityData: cityData,
       selectedData: [],
       selectedIdArr: []
-      // 11, 12, 13, 14, 15, 21, 22
     }
   },
   components: {

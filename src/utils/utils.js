@@ -218,12 +218,22 @@ export const clearTagOfData = (list, prop, Vue) => {
  * @param { Array } list
  * @param {*} arr
  */
-export const findCheck = (list, prop, arr = []) => {
-  list.forEach(ret => {
-    if (ret.check) {
+export const findCheck = ({
+  list = [],
+  prop = {},
+  filter = 0, // 0: 首层可多选，即不过滤首层；1：首层不可多选，过滤首层
+  arr = []
+}) => {
+  list.forEach((ret, index) => {
+    if (ret.check && !filter) {
       arr.push(ret)
     } else if (ret[prop.children] && ret[prop.children].length !== 0) {
-      findCheck(ret[prop.children], prop, arr)
+      findCheck({
+        list: ret[prop.children],
+        prop,
+        filter: 0,
+        arr
+      })
     }
   })
   return arr

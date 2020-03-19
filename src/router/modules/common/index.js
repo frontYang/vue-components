@@ -5,6 +5,7 @@ import VideoPlay from '@/views/Common/VideoPlay/Index'
 import ImageScroll from '@/views/Common/ImageScroll/Index'
 import SelectDrop from '@/views/Common/SelectDrop/Index'
 import Cascader from '@/views/Common/Cascader/Index'
+import Cascader2 from '@/views/Common/Cascader2/Index'
 import TreeSearch from '@/views/Common/TreeSearch/Index'
 
 // 子路由
@@ -30,6 +31,14 @@ export default {
       component: Cascader,
       meta: {
         title: '级联多选__样式一'
+      }
+    },
+    {
+      path: '/common/cascader2',
+      name: 'cascader2',
+      component: Cascader2,
+      meta: {
+        title: '级联多选__样式二'
       }
     },
     {

@@ -8,6 +8,7 @@
             :prop="prop"
             :disabled="disabled"
             :data="item.data"
+            :multi="index === 0 ? isMultiFirst : true"
             :level="item.level"
             @on-child="pushChild"
             @on-select="selectAll"
@@ -57,6 +58,11 @@ export default {
       type: Boolean,
       default: false
     },
+    // 首层是否多选
+    isMultiFirst: {
+      type: Boolean,
+      default: true
+    },
     // 是否隐藏结果ui
     hideResult: {
       type: Boolean,
@@ -87,7 +93,11 @@ export default {
   },
   computed: {
     selectedData() {
-      return this.$utils.findCheck(this.newData, this.prop)
+      return this.$utils.findCheck({
+        list: this.newData,
+        prop: this.prop,
+        filter: 1
+      })
     }
   },
   watch: {

@@ -25,6 +25,11 @@ export default {
           checked: true
         },
         {
+          label: '级联多选__样式二',
+          url: '/#/common/cascader2',
+          checked: true
+        },
+        {
           label: '树形数组下拉框模糊搜索',
           checked: true
         },

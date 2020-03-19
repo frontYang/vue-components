@@ -1,6 +1,6 @@
 <template>
   <div class="ui-cascader__box">
-    <div class="check-all">
+    <div class="check-all" v-if="multi">
       <div :class="disabled ? 'item-select cataract disabled' : 'item-select cataract'" @click="selectAll"></div>
       <el-checkbox :disabled="disabled" class="check-item" :indeterminate="allIndeterminate" v-model="all">全选</el-checkbox>
     </div>
@@ -12,11 +12,16 @@
         :class="itemClasses(item)"
         @click="!disabled && $emit('on-child', {item, level})"
       >
-        <el-checkbox :disabled="disabled" :indeterminate="itemIndeterminate(item)" v-model="item[prop.check]">{{item[prop.value]}}</el-checkbox>
+        <el-checkbox v-if="multi" :disabled="disabled" :indeterminate="itemIndeterminate(item)" v-model="item[prop.check]">{{item[prop.value]}}</el-checkbox>
+        <span class="check-item" v-else>{{item[prop.value]}}</span>
         <i class="el-icon-arrow-right"></i>
         <span class="item-checkbox cataract" @click="selectItem(item)"></span>
       </div>
-      <el-checkbox v-else class="check-item" v-model="item[prop.check]">{{item[prop.value]}}</el-checkbox>
+      <template v-else>
+        <el-checkbox v-if="multi" class="check-item" v-model="item[prop.check]">{{item[prop.value]}}</el-checkbox>
+        <span v-else class="check-item">{{item[prop.value]}}</span>
+      </template>
+
     </div>
   </div>
 </template>
@@ -36,6 +41,9 @@ export default {
     },
     level: {
       type: Number
+    },
+    multi: {
+      type: Boolean
     },
     prop: {
       type: Object,
@@ -144,10 +152,11 @@ export default {
   .check-item{
     margin: 0;
     padding: 0 12px;
-    display: block;
+    // display: block;
     position: relative;
     height: 36px;
     line-height: 36px;
+    font-size: 14px;
     &.disabled{
       cursor: not-allowed;
     }
