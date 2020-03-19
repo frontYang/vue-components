@@ -31,6 +31,7 @@ export default {
         },
         {
           label: '树形数组下拉框模糊搜索',
+          url: '/#/common/treesearch',
           checked: true
         },
         {

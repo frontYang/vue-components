@@ -245,6 +245,7 @@ export const findCheck = ({
 export const selectCheck = ({ data, selected, prop, check }) => {
   data.forEach((item) => {
     let checked = false
+    // eslint-disable-next-line
     if (check !== undefined) {
       checked = check
     } else {
@@ -277,12 +278,12 @@ export const findTreeStr = (data, prop, value) => {
       let str = first ? (first + ' / ') : ''
       str += value + ' / ' + inner.value
       newArr.push({
-        [prop.id]: inner[prop.id],
-        [prop.value]: inner[prop.value],
         path_name: str,
-        [prop.check]: inner[prop.check],
         pid: inner.pid,
         index: inner.index,
+        [prop.id]: inner[prop.id],
+        [prop.value]: inner[prop.value],
+        [prop.check]: inner[prop.check],
         [prop.children]: inner[prop.children]
       })
     })
@@ -296,12 +297,12 @@ export const findTreeStr = (data, prop, value) => {
     str += item.value
 
     !value && arr.push({
-      [prop.id]: item[prop.id],
-      [prop.value]: item[prop.value],
       path_name: str,
-      [prop.check]: item[prop.check],
       pid: item.pid,
       index: item.index,
+      [prop.id]: item[prop.id],
+      [prop.value]: item[prop.value],
+      [prop.check]: item[prop.check],
       [prop.children]: findTreeStr(item[prop.children], prop, str)
     })
     if (item[prop.children] && item[prop.children].length > 0) {

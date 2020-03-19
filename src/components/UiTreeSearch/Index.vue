@@ -133,9 +133,10 @@ export default {
       padding: 0;
 
       li{
+        font-size: 14px;
         line-height: 22px;
         cursor: pointer;
-        padding: 5px 12px;
+        padding: 12px;
 
         p{
           padding: 0;

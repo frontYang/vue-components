@@ -1,0 +1,126 @@
+[
+  {
+      "id": 1,
+      "check": false,
+      "value": "移动应用",
+      "children": [
+          {
+              "id": 10005,
+              "check": false,
+              "value": "网上购物"
+          },
+          {
+              "id": 10004,
+              "check": false,
+              "value": "阅读学习"
+          },
+          {
+              "id": 10014,
+              "check": false,
+              "value": "新闻资讯"
+          },
+          {
+              "id": 10003,
+              "check": false,
+              "value": "影音图像"
+          },
+          {
+              "id": 10008,
+              "check": false,
+              "value": "旅游出行"
+          },
+          {
+              "id": 10002,
+              "check": false,
+              "value": "常用工具"
+          },
+          {
+              "id": 10011,
+              "check": false,
+              "value": "办公软件"
+          },
+          {
+              "id": 10000,
+              "check": false,
+              "value": "社交网络"
+          },
+          {
+              "id": 10015,
+              "check": false,
+              "value": "美化手机"
+          },
+          {
+              "id": 10006,
+              "check": false,
+              "value": "金融理财"
+          },
+          {
+              "id": 10013,
+              "check": false,
+              "value": "性能优化"
+          },
+          {
+              "id": 10007,
+              "check": false,
+              "value": "生活服务"
+          },
+          {
+              "id": 10009,
+              "check": false,
+              "value": "通信聊天"
+          }
+      ]
+  },
+  {
+      "id": 2,
+      "check": false,
+      "value": "移动游戏",
+      "children": [
+          {
+              "id": 10010,
+              "check": false,
+              "value": "休闲时间"
+          },
+          {
+              "id": 10030,
+              "check": false,
+              "value": "儿童益智"
+          },
+          {
+              "id": 10029,
+              "check": false,
+              "value": "网络游戏"
+          },
+          {
+              "id": 10001,
+              "check": false,
+              "value": "动作射击"
+          },
+          {
+              "id": 10020,
+              "check": false,
+              "value": "跑酷竞速"
+          },
+          {
+              "id": 10021,
+              "check": false,
+              "value": "体育格斗"
+          },
+          {
+              "id": 10016,
+              "check": false,
+              "value": "扑克棋牌"
+          },
+          {
+              "id": 10018,
+              "check": false,
+              "value": "经营策略"
+          },
+          {
+              "id": 10025,
+              "check": false,
+              "value": "角色扮演"
+          }
+      ]
+  }
+]
