@@ -68,6 +68,11 @@ export default {
       type: Boolean,
       default: false
     },
+    // 清除是否有二次确认
+    txtClearConfirm: {
+      type: String,
+      default: ''
+    },
     // key值
     prop: {
       type: Object,
@@ -177,7 +182,19 @@ export default {
     },
     // 清除
     clearTag() {
-      this.$utils.clearTagOfData(this.newData, this.prop, this)
+      if (this.txtClearConfirm !== '') {
+        this.$confirm('是否清空对所有计划的监控?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$utils.clearTagOfData(this.newData, this.prop, this)
+        }).catch(() => {
+
+        })
+      } else {
+        this.$utils.clearTagOfData(this.newData, this.prop, this)
+      }
     },
 
     pushChild(params) {

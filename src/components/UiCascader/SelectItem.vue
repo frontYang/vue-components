@@ -30,6 +30,7 @@ export default {
   .select-header{
     padding: 0 12px;
     height: 34px;
+    line-height: 34px;
     font-size: 14px;
     color: #333;
     border-bottom: solid 1px #dee4f5;
