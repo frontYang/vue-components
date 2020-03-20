@@ -1,6 +1,7 @@
 
 import Common from '@/views/Common/Index'
 import Dragtime from '@/views/Common/Dragtime/Index'
+import Dragtime2 from '@/views/Common/Dragtime2/Index'
 import VideoPlay from '@/views/Common/VideoPlay/Index'
 import ImageScroll from '@/views/Common/ImageScroll/Index'
 import SelectDrop from '@/views/Common/SelectDrop/Index'
@@ -22,7 +23,15 @@ export default {
       name: 'dragtime',
       component: Dragtime,
       meta: {
-        title: '时间拖拽'
+        title: '时间拖拽__样式一'
+      }
+    },
+    {
+      path: '/common/dragtime2',
+      name: 'dragtime2',
+      component: Dragtime2,
+      meta: {
+        title: '时间拖拽__样式二'
       }
     },
     {

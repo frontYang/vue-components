@@ -6,19 +6,19 @@
     <table class="ui-weektime-table" :class="{'box-min-table': colspan < 2}">
       <thead class="ui-weektime-head">
         <tr>
-          <th rowspan="8" class="week-td">星期/时间</th>
+          <th rowspan="8" class="week-td">{{hideSub ? '时间' : '星期/时间'}}</th>
           <th :colspan="12 * colspan">00:00 - 12:00</th>
           <th :colspan="12 * colspan">12:00 - 24:00</th>
           <th>操作</th>
         </tr>
         <tr>
           <td v-for="t in theadArr" :key="t" :colspan="colspan">{{t}}</td>
-          <td><el-checkbox v-model="checkAll" @change="selectAll" :indeterminate="indeterminate">全选</el-checkbox></td>
+          <td><el-checkbox v-if="!hideSub" v-model="checkAll" @change="selectAll" :indeterminate="indeterminate">全选</el-checkbox></td>
         </tr>
       </thead>
       <tbody class="ui-weektime-body">
         <tr v-for="t in data" :key="t.row">
-          <td>{{t.value}}</td>
+          <td>{{hideSub ? '' : t.value}}</td>
           <td
             v-for="n in t.child"
             :key="`${n.row}-${n.col}`"
@@ -40,12 +40,12 @@
           <td colspan="50" class="ui-weektime-preview">
             <div class="g-clearfix ui-weektime-con">
               <span class="g-pull-left">{{selectState ? '已选择时间段' : '可拖动鼠标选择时间段'}}</span>
-              <a class="g-pull-right" @click.prevent="$emit('on-clear')">清空选择</a>
+              <a class="g-pull-right" @click.prevent="clearSelect">清空选择</a>
             </div>
             <div v-if="selectState" class="ui-weektime-time">
               <div v-for="t in selectValue" :key="t.id">
                 <p v-if="t.value">
-                  <span class="g-tip-text">{{t.week}}：</span>
+                  <span class="g-tip-text">{{hideSub ? ''  : t.week + '：'}}</span>
                   <span>{{t.value}}</span>
                 </p>
               </div>
@@ -97,6 +97,9 @@ export default {
   },
 
   computed: {
+    hideSub() {
+      return this.data.length === 1
+    },
     styleValue() {
       return {
         width: `${this.width}px`,
@@ -208,6 +211,12 @@ export default {
 
     setRowFlg(flg) {
       for (let i = 0; i < 7; i++) { this.rowFlg[i] = flg }
+    },
+
+    clearSelect() {
+      this.checkAll = false
+      this.setRowFlg(false)
+      this.$emit('on-clear')
     }
   }
 }

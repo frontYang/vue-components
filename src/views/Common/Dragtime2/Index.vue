@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h2>展示一周的时间点</h2>
+    <h2>只展示一天的时间点</h2>
     <ui-dragtime v-model="timeRange" :data="weekData" @on-clear="clearTime" />
     <p>提交数据：</p>
     <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{JSON.stringify(result)}}</pre>
@@ -10,7 +10,7 @@
 <script>
 import UiDragtime from '@/components/UiDragtime/Index'
 import week from '@/utils/weektime_data'
-const weekData = week()
+const weekData = week(['星期一'])
 
 export default {
   data() {
@@ -18,13 +18,7 @@ export default {
       drawer: false,
       weekData: weekData,
       timeVal: {
-        '0': [8, 9, 10],
-        '1': [],
-        '2': [10, 11, 12],
-        '3': [],
-        '4': [],
-        '5': [],
-        '6': []
+        '0': [8, 9, 10]
       }
     }
   },

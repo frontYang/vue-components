@@ -15,9 +15,14 @@ export default {
     return {
       todoList: [
         {
-          label: '时间拖拽选中',
+          label: '时间拖拽选中__样式一',
           checked: true,
           url: '/#/common/dragtime'
+        },
+        {
+          label: '时间拖拽选中__样式二',
+          checked: true,
+          url: '/#/common/dragtime2'
         },
         {
           label: '级联多选__样式一',

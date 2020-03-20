@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <h1>全部多选</h1>
     <ui-cascader
       ref="cascader"
       v-model="selectedIdArr"
