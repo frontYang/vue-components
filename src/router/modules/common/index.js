@@ -9,6 +9,7 @@ import Cascader from '@/views/Common/Cascader/Index'
 import Cascader2 from '@/views/Common/Cascader2/Index'
 import TreeSearch from '@/views/Common/TreeSearch/Index'
 import CalendarCustom from '@/views/Common/CalendarCustom/Index'
+import Editor from '@/views/Common/Editor/Index'
 
 // 子路由
 export default {
@@ -89,6 +90,14 @@ export default {
       component: CalendarCustom,
       meta: {
         title: '树形数组下拉框搜索'
+      }
+    },
+    {
+      path: '/common/editor',
+      name: 'editor',
+      component: Editor,
+      meta: {
+        title: '富文本编辑器（背景图片）'
       }
     }
   ]

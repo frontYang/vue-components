@@ -60,6 +60,10 @@ export default {
           checked: true
         },
         {
+          label: '富文本编辑器（背景图片）',
+          checked: false
+        },
+        {
           label: '头条上传组件（tab内嵌套tab，动态控制）',
           checked: false
         },
