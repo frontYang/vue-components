@@ -57,7 +57,9 @@ export default {
     },
     onEditorReady(quill) {
       // console.log('editor ready!', quill)
-      this.editor.root.style.background = `url(${bg}) repeat`
+      this.editor.root.style.background = `url(${bg}) repeat-x #0e9dbb`
+      this.editor.root.style.minHeight = '400px'
+      this.editor.root.style.padding = '100px 55px 200px'
     },
     onEditorChange({ quill, html, text }) {
       // console.log('editor change!', quill, html, text)
@@ -70,7 +72,5 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/_common.scss';
-.ql-editor{
-	height:400px;
-}
+
 </style>
