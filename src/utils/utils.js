@@ -361,3 +361,46 @@ export const findTreeFuzzy = ({
   const result = isStr ? findTreeStr(newarr, prop) : newarr
   return result
 }
+
+/**
+ * 日历————获取指定年月的全部日期， 默认当前年月
+ * @param {Number} year 年份
+ * @param {Number} month 月份
+ */
+export const getDaysInMonth = ({
+  year = new Date().getFullYear(),
+  month = new Date().getMonth() + 1
+}) => {
+  const daysOfMonth = []
+  const lastDayOfMonth = new Date(year, month, 0).getDate()
+
+  for (let i = 1; i <= lastDayOfMonth; i++) {
+    const month1 = parseInt(month) < 10 ? `0${parseInt(month)}` : month
+    const date = parseInt(i) < 10 ? `0${parseInt(i)}` : i
+    const format = `${year}-${month1}-${date}`
+    const day = new Date(format).getDay()
+
+    daysOfMonth.push({
+      year: year,
+      month: month1,
+      date: date,
+      day: day,
+      format: format
+    })
+  }
+  return daysOfMonth
+}
+
+export const formatTime = (time = new Date()) => {
+  const month = time.getMonth() + 1
+  const date = time.getDate()
+  return {
+    year: time.getFullYear(),
+    month: parseInt(month) < 10 ? `0${parseInt(month)}` : month,
+    date: parseInt(date) < 10 ? `0${parseInt(date)}` : date,
+    day: time.getDay(),
+    hours: time.getHours(),
+    minutes: time.getMinutes(),
+    seconds: time.getSeconds()
+  }
+}

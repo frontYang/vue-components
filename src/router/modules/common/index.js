@@ -8,6 +8,7 @@ import SelectDrop from '@/views/Common/SelectDrop/Index'
 import Cascader from '@/views/Common/Cascader/Index'
 import Cascader2 from '@/views/Common/Cascader2/Index'
 import TreeSearch from '@/views/Common/TreeSearch/Index'
+import CalendarCustom from '@/views/Common/CalendarCustom/Index'
 
 // 子路由
 export default {
@@ -78,6 +79,14 @@ export default {
       path: '/common/treesearch',
       name: 'treesearch',
       component: TreeSearch,
+      meta: {
+        title: '树形数组下拉框搜索'
+      }
+    },
+    {
+      path: '/common/calendar_custom',
+      name: 'calendar_custom',
+      component: CalendarCustom,
       meta: {
         title: '树形数组下拉框搜索'
       }
