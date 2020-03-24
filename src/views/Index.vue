@@ -55,15 +55,16 @@ export default {
           checked: true
         },
         {
+          label: '自定义日期设置&多选',
+          url: '/#/common/calendar_custom',
+          checked: true
+        },
+        {
           label: '头条上传组件（tab内嵌套tab，动态控制）',
           checked: false
         },
         {
           label: 'h5可视化网站',
-          checked: false
-        },
-        {
-          label: '自定义日期设置',
           checked: false
         }
       ]
