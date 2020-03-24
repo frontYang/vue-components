@@ -81,15 +81,10 @@ export default {
     this.bindBtn()
   },
   beforeDestroy() {
-    const prevBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(1)')
-    const currentBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(2)')
-    const nextBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(3)')
-    prevBtn.removeEventListener('click', this.changeMonth)
-    currentBtn.removeEventListener('click', this.changeMonth)
-    nextBtn.removeEventListener('click', this.changeMonth)
+    this.unbindBtn()
   },
   methods: {
-    /* 绑定切换 */
+    /* 绑定切换事件 */
     bindBtn() {
       this.$nextTick(() => {
         const prevBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(1)')
@@ -105,6 +100,16 @@ export default {
           this.changeMonth('next')
         })
       })
+    },
+
+    /* 解除事件绑定 */
+    unbindBtn() {
+      const prevBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(1)')
+      const currentBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(2)')
+      const nextBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(3)')
+      prevBtn.removeEventListener('click', this.changeMonth)
+      currentBtn.removeEventListener('click', this.changeMonth)
+      nextBtn.removeEventListener('click', this.changeMonth)
     },
 
     /* 切换月份 */
