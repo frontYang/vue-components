@@ -51,10 +51,19 @@ export default {
         },
         {
           label: '鼠标移入固定宽高标签内 图片自动滚动至底部',
+          url: '/#/common/imagescroll',
+          checked: true
+        },
+        {
+          label: '头条上传组件（tab内嵌套tab，动态控制）',
           checked: false
         },
         {
           label: 'h5可视化网站',
+          checked: false
+        },
+        {
+          label: '自定义日期设置',
           checked: false
         }
       ]

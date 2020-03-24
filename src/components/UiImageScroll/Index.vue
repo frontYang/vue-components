@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-image-scroll">
+  <div class="ui-image-scroll scrollbar">
     <div
       class="image-item"
       v-for="(item, index) in list" :key="index"
@@ -17,12 +17,16 @@
 
 <script>
 let timmer = null
-function scroll(top, item) {
-  console.log(item.offsetTop, item.offsetHeight)
-
-  setInterval(() => {
-    console.log(item.offsetTop)
-  }, 1000)
+let timmerInterval = null
+function scrollImage(item, space) {
+  return setInterval(() => {
+    if (space <= item.offsetHeight - 240) {
+      item.style.marginTop = -space + 'px'
+      space++
+    } else {
+      clearInterval(timmerInterval)
+    }
+  }, 8)
 }
 
 export default {
@@ -31,44 +35,39 @@ export default {
       list: [
         {
           image: '//dummyimage.com/320x600'
+        },
+        {
+          image: '//dummyimage.com/320x500'
         }
       ]
     }
   },
 
-  components: {
-
-  },
-
-  mounted() {},
-
   methods: {
     onMouseenter(index, item) {
       if (timmer) { clearTimeout(timmer) }
+      if (timmerInterval) { clearInterval(timmerInterval) }
       timmer = setTimeout(() => {
         const itemObj = document.querySelectorAll('.image-item')[index]
         const imgObj = itemObj.querySelector('img')
-        // console.log(itemObj.offsetTop, imgObj.offsetTop)
-        scroll(0, imgObj)
+        imgObj.style.transition = 'initial'
+        timmerInterval = scrollImage(imgObj, 50)
       }, 1000)
     },
     onMouseleave(index, item) {
-      // const itemObj = document.querySelectorAll('.image-item')[index]
-      // itemObj.className = 'image-item'
-      // const itemObj = document.querySelectorAll('.image-item')[index]
-      // const imgObj = itemObj.querySelector('img')
-      // scroll(0, imgObj)
-      // imgObj.style.marginTop = 0
+      if (timmer) { clearTimeout(timmer) }
+      if (timmerInterval) { clearInterval(timmerInterval) }
+      const itemObj = document.querySelectorAll('.image-item')[index]
+      const imgObj = itemObj.querySelector('img')
+      imgObj.style.transition = 'all .6s'
+      imgObj.style.marginTop = 0 + 'px'
     }
   }
 }
 </script>
 
 <style lang="scss">
-@keyframes slideIn {
-  from { transform: translateY(-100%) }
-  to   { transform: translateY(0); }
-}
+@import '@/assets/styles/_common.scss';
 
 .ui-image-scroll{
   display: flex;
@@ -79,17 +78,15 @@ export default {
     margin: 10px;
     box-sizing: border-box;
     cursor: pointer;
-
-    &.slidein {
-      img{
-        animation: 5s ease-in 1s reverse both running slideIn;
-      }
-    }
-
   }
   .el-image{
     height: 240px;
     width: 320px;
+    // overflow-y: scroll;
+
+    img{
+      // transition: all .6s;
+    }
     .el-image__inner{
       height: auto;
     }
