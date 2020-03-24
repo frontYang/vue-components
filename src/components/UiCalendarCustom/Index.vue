@@ -1,7 +1,8 @@
 <template>
   <div class="ui-calendar-custom">
-    <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="checkAllChange">全选</el-checkbox>
-    <el-checkbox-group v-model="weekValue" @change="clickWeek" >
+    <el-checkbox v-model="checkAll[curTime]" :indeterminate="isIndeterminate" @change="checkAllChange">全选</el-checkbox>
+
+    <el-checkbox-group v-model="weekValue[curTime]" @change="clickWeek" >
       <el-checkbox v-for="(item, index) in weekLabel" :key="item" :label="index">{{ item }}</el-checkbox>
     </el-checkbox-group>
     <el-calendar ref="elCalendar" v-model="dateValue" :first-day-of-week="0">
@@ -24,32 +25,53 @@ export default {
     return {
       stateLabel: ['休息', '上班'],
       selectDayArr: [], // 已选
-      checkAll: false,
+      checkAll: {},
       weekLabel: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
       dateValue: '',
       weekData: [], // 存储全选
-      weekValue: [],
+      weekValue: {},
+      selectDayArr1: [], // 备用存储
       curMonthData: [] // 当前月日期数据
     }
   },
   computed: {
     isIndeterminate() {
-      return this.weekValue.length > 0 && !this.checkAll
+      return this.weekValue[this.curTime] && this.weekValue[this.curTime].length > 0 && !this.checkAll
     },
+
+    // 选中样式
     currentCls() {
       return item => {
         return this.selectDayArr.includes(`${item.day}`) ? 'date-cell is-selected' : 'date-cell'
       }
     },
+
+    // 日历文案自定义显示
     dateLabel() {
       return item => {
         const value = item.day.split('-').slice(2)
         const checked = this.selectDayArr.includes(`${item.day}`) ? `<span>${this.stateLabel[0]}</span>` : `<span>${this.stateLabel[1]}</span>`
         return `<span>${value}</span>` + checked
       }
+    },
+
+    // 当前年月，用来记录周期位置
+    curTime() {
+      const now = this.$utils.formatTime(this.dateValue !== '' ? this.dateValue : new Date())
+      return `${now.year}-${now.month}`
     }
   },
   watch: {
+    curTime: {
+      handler() {
+        if (!this.weekValue[this.curTime]) {
+          this.$set(this.weekValue, this.curTime, [])
+        }
+        if (this.checkAll[this.curTime] === 'undefined') {
+          this.$set(this.checkAll, this.curTime, false)
+        }
+      }
+    },
     selectDayArr: {
       handler() {
         this.$emit('input', this.selectDayArr)
@@ -63,7 +85,7 @@ export default {
           year: formatValue.year,
           month: formatValue.month
         })
-        this.weekValue.forEach((item, index) => {
+        this.weekValue[this.curTime].forEach((item, index) => {
           const daysInMonthData = daysInMonth.filter(v => v.day === item).map(m => m.format)
           daysInMonthData.forEach((item) => {
             this.updateWeekDate({
@@ -72,11 +94,22 @@ export default {
             })
           })
         })
-        this.selectDayArr = this.weekData
-      }
+        this.selectDayArr = [...this.selectDayArr1, ...this.weekData]
+      },
+      deep: true
+    }
+  },
+  created() {
+    if (!this.weekValue[this.curTime]) {
+      this.$set(this.weekValue, this.curTime, [])
+    }
+    if (!this.checkAll[this.curTime]) {
+      this.$set(this.checkAll, this.curTime, false)
     }
   },
   mounted() {
+    this.selectDayArr1 = this.value
+    this.initWeek()
     this.selectDayArr = this.value
     this.bindBtn()
   },
@@ -112,6 +145,31 @@ export default {
       nextBtn.removeEventListener('click', this.changeMonth)
     },
 
+    /* 初始化计算 */
+    initWeek() {
+      const formatValue = this.$utils.formatTime(this.dateValue !== '' ? this.dateValue : new Date())
+      const daysInMonth = this.$utils.getDaysInMonth({
+        year: formatValue.year,
+        month: formatValue.month
+      })
+
+      const curDays = daysInMonth.map(m => m.day)
+      const selectSumArr = []
+      const selectedDate = daysInMonth.filter(m => this.value.includes(m.format)).map(m => m.day)
+      const defaultSumArr = []
+      for (let i = 0; i < 7; i++) {
+        defaultSumArr.push(curDays.filter(m => m === i).length)
+        selectSumArr.push(selectedDate.filter(m => m === i).length)
+      }
+
+      // 本周全选
+      for (let i = 0; i < selectSumArr.length; i++) {
+        if (selectSumArr[i] === defaultSumArr[i] && !this.weekValue[this.curTime].includes(i)) {
+          this.weekValue[this.curTime].push(i)
+        }
+      }
+    },
+
     /* 切换月份 */
     changeMonth(type) {
       const formatValue = this.$utils.formatTime(this.dateValue)
@@ -119,7 +177,7 @@ export default {
         year: formatValue.year,
         month: formatValue.month
       })
-      this.weekValue.forEach((item) => {
+      this.weekValue[this.curTime].forEach((item) => {
         const daysInMonthData = daysInMonth.filter(v => v.day === item).map(m => m.format)
         daysInMonthData.forEach((item) => {
           this.updateWeekDate({
@@ -128,20 +186,22 @@ export default {
           })
         })
       })
+
+      this.initWeek()
     },
 
     /* 全选 */
     checkAllChange(val) {
       if (val) {
-        this.weekValue = [0, 1, 2, 3, 4, 5, 6]
+        this.weekValue[this.curTime] = [0, 1, 2, 3, 4, 5, 6]
       } else {
-        this.weekValue = []
+        this.weekValue[this.curTime] = []
       }
     },
 
     /* 周期选择 */
     clickWeek(val) {
-      this.checkAll = this.weekValue.length === this.weekLabel.length
+      this.checkAll = this.weekValue[this.curTime].length === this.weekLabel.length
     },
 
     updateWeekDate(data) {
