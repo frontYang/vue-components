@@ -61,7 +61,8 @@ export default {
         },
         {
           label: '富文本编辑器（背景图片）',
-          checked: false
+          checked: true,
+          url: '/#/common/editor'
         },
         {
           label: '头条上传组件（tab内嵌套tab，动态控制）',
