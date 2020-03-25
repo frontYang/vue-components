@@ -1,13 +1,14 @@
 <template>
   <div class="page">
     <ui-editor
+      ref="editor"
       v-model="val"
       @on-blur="emitBlur"
       @on-focus="emitFocus"
       @on-change="emitChange"
       @on-ready="emitReady"
     />
-    <el-button size="small" type="primary">保存</el-button>
+    <el-button size="small" type="primary" @click="save">保存</el-button>
   </div>
 </template>
 
@@ -29,6 +30,9 @@ export default {
   mounted() {
   },
   methods: {
+    save() {
+      this.$refs.editor.updateContentSubmit()
+    },
     emitBlur(quill) {},
     emitFocus(quill) {},
     emitChange({ quill, html, text }) {},

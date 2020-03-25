@@ -122,10 +122,14 @@ export default {
         this.editor.root.style.background = ''
       }
     },
-    onEditorBlur(quill) {
+    /* 更新提交的内容 */
+    updateContentSubmit() {
       const html = this.editor.container.firstElementChild.innerHTML
       const style	= `background: ${this.editor.root.style.background}; background-size: ${this.editor.root.style.backgroundSize}; min-height: ${this.$refs.myQuillEditor.quill.root.style.minHeight}`
       this.value.content = `<style>${quillSnowStyle}</style><div style='${style}'>${html}</div>`
+    },
+    onEditorBlur(quill) {
+      this.updateContentSubmit()
       this.$emit('on-blur', quill)
     },
     onEditorFocus(quill) {
