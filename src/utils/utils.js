@@ -140,7 +140,7 @@ export const loadImage = (src) => {
   return new Promise((resolve, reject) => {
     const img = document.createElement('img')
     img.src = src
-    img.crossOrigin = 'Anonymous'
+    // img.crossOrigin = 'Anonymous' // 此代码会出现跨域问题
     img.onload = function() {
       resolve({
         width: img.width,

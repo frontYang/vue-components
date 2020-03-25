@@ -1,6 +1,13 @@
 <template>
   <div class="page">
-    <ui-editor v-model="content"/>
+    <ui-editor
+      v-model="val"
+      @on-blur="emitBlur"
+      @on-focus="emitFocus"
+      @on-change="emitChange"
+      @on-ready="emitReady"
+    />
+    <el-button size="small" type="primary">保存</el-button>
   </div>
 </template>
 
@@ -10,7 +17,10 @@ import UiEditor from '@/components/UiEditor/Index'
 export default {
   data() {
     return {
-      content: '<h2>I am Example</h2>'
+      val: {
+        content: '',
+        bg: 'https://dummyimage.com/500x700&text=background'
+      }
     }
   },
   components: {
@@ -18,8 +28,12 @@ export default {
   },
   mounted() {
   },
-  methods: {}
-
+  methods: {
+    emitBlur(quill) {},
+    emitFocus(quill) {},
+    emitChange({ quill, html, text }) {},
+    emitReady(quill) {}
+  }
 }
 </script>
 
