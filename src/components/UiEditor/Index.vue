@@ -47,11 +47,11 @@ export default {
           toolbar: {
             container: container.concat([['image-bg', 'del-bg']]),
             handlers: {
-              'image': function(value) {
+              image: function(value) {
                 QuillWatch.emit(this.quill.id)
               },
               'image-bg': (value) => {
-                editorUtil.customUpload(this.editor).then(src => {
+                editorUtil.customUpload(this.editor).then((src) => {
                   this.bg = src
                 })
               },
@@ -113,8 +113,8 @@ export default {
     /* 初始化背景 */
     initBg() {
       if (this.bg && this.bg !== '') {
-        this.$utils.loadImage(this.bg).then(res => {
-          this.editor.root.style.background = 'url(' + this.bg + ') no-repeat'
+        this.$utils.loadImage(this.bg).then((res) => {
+          this.editor.root.style.background = `url(\'${this.bg}\') no-repeat`
           this.editor.root.style.backgroundSize = `${res.width}px ${res.height}px`
           this.editor.root.style.minHeight = `${res.height}px`
         })
@@ -125,7 +125,7 @@ export default {
     /* 更新提交的内容 */
     updateContentSubmit() {
       const html = this.editor.container.firstElementChild.innerHTML
-      const style	= `background: ${this.editor.root.style.background}; background-size: ${this.editor.root.style.backgroundSize}; min-height: ${this.$refs.myQuillEditor.quill.root.style.minHeight}`
+      const style = `background: ${this.editor.root.style.background}; background-size: ${this.editor.root.style.backgroundSize}; min-height: ${this.$refs.myQuillEditor.quill.root.style.minHeight}`
       this.value.content = `<style>${quillSnowStyle}</style><div style='${style}'>${html}</div>`
     },
     onEditorBlur(quill) {
@@ -149,5 +149,4 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/_common.scss';
-
 </style>

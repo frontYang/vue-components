@@ -1,12 +1,20 @@
 <template>
-<!-- 搜索 -->
+  <!-- 搜索 -->
   <el-form class="ui-input-search">
-    <el-input v-model="searchVal" @input="input" class="input-search" prefix-icon="el-icon-search" placeholder="请输入行为类目词或关键词" clearable @clear="clear"></el-input>
+    <el-input
+      v-model="searchVal"
+      @input="input"
+      class="input-search"
+      prefix-icon="el-icon-search"
+      placeholder="请输入"
+      clearable
+      @clear="clear"
+    ></el-input>
     <el-card class="list-search" v-if="showList" v-loading="loading">
       <ul>
         <template v-if="list.length > 0">
           <li @click.stop="selected(index)" v-for="(item, index) in list" :key="index">
-            <p class="label">{{item.path_name || item.name}}</p>
+            <p class="label">{{ item.path_name || item.name }}</p>
           </li>
         </template>
         <template v-else>
@@ -38,8 +46,7 @@ export default {
       showList: false
     }
   },
-  computed: {
-  },
+  computed: {},
   watch: {
     searchVal: {
       handler(nVal) {
@@ -69,10 +76,11 @@ export default {
   methods: {
     /* 获取树形结构 */
     findTreeData() {
-      this.list = this.$utils.findTreeFuzzy({
-        val: this.searchVal,
-        data: this.treeData
-      }) || []
+      this.list =
+        this.$utils.findTreeFuzzy({
+          val: this.searchVal,
+          data: this.treeData
+        }) || []
     },
 
     /* 选中 */
@@ -109,11 +117,11 @@ export default {
 
 <style scope lang="scss">
 @import '@/assets/styles/_common.scss';
-.ui-input-search{
-  &.el-form{
+.ui-input-search {
+  &.el-form {
     position: relative;
   }
-  .list-search{
+  .list-search {
     width: 100%;
     box-sizing: border-box;
     position: absolute !important;
@@ -123,32 +131,32 @@ export default {
     overflow: auto;
     z-index: 10;
 
-    .el-card__body{
+    .el-card__body {
       padding: 5px 0 10px !important;
     }
 
-    ul{
+    ul {
       list-style: none;
       margin: 0;
       padding: 0;
 
-      li{
+      li {
         font-size: 14px;
         line-height: 22px;
         cursor: pointer;
         padding: 12px;
 
-        p{
+        p {
           padding: 0;
           margin: 0;
         }
 
-        .tip{
+        .tip {
           color: $gray;
           font-size: 12px;
         }
 
-        &:hover{
+        &:hover {
           background: $hoverbg;
         }
       }

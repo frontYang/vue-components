@@ -9,6 +9,15 @@
       @on-ready="emitReady"
     />
     <el-button size="small" type="primary" @click="save">保存</el-button>
+
+    <p>编辑器内容(包含quill样式引入)：</p>
+    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">
+      {{ val.content }}
+    </pre>
+    <p>背景图：</p>
+    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">
+      {{ val.bg }}
+    </pre>
   </div>
 </template>
 
@@ -27,8 +36,7 @@ export default {
   components: {
     'ui-editor': UiEditor
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     save() {
       this.$refs.editor.updateContentSubmit()
@@ -43,5 +51,4 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/_common.scss';
-
 </style>

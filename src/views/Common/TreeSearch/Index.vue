@@ -1,5 +1,7 @@
 <template>
   <div class="page">
+    <p>输入城市名可查看效果</p>
+    <br />
     <ui-tree-search v-model="value" :tree-data="data" />
   </div>
 </template>
@@ -22,5 +24,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

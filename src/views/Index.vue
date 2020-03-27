@@ -1,11 +1,11 @@
 <template>
-	<div class="page page-index">
-		<h2>todoList</h2>
+  <div class="page page-index">
+    <h2>todoList</h2>
     <p v-for="(item, index) in todoList" :key="index">
       <el-checkbox :disabled="true" :value="item.checked"></el-checkbox>
-      <el-link type="primary" :disabled="!item.checked" :href="item.url">{{item.label}}</el-link>
+      <el-link type="primary" :disabled="!item.checked" :href="item.url">{{ item.label }}</el-link>
     </p>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -60,7 +60,7 @@ export default {
           checked: true
         },
         {
-          label: '富文本编辑器（背景图片）',
+          label: 'quill富文本编辑器（扩展背景图片）',
           checked: true,
           url: '/#/common/editor'
         },
@@ -79,8 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-link{
+.el-link {
   margin-left: 10px;
 }
 </style>
-
