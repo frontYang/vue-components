@@ -16,7 +16,7 @@
 import Config from './Config'
 import Panel from './Panel'
 import Elements from './Elements'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   components: {
