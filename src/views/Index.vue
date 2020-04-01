@@ -71,6 +71,10 @@ export default {
         {
           label: 'h5可视化网站',
           checked: false
+        },
+        {
+          label: '将网页生成pdf文件（html2canvas + jspdf）',
+          checked: false
         }
       ]
     }

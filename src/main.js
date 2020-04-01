@@ -10,6 +10,7 @@ import './registerServiceWorker'
 import https from './utils/https'
 import * as utils from './utils/utils'
 import * as request from './utils/request'
+import * as validate from './utils/validate'
 
 // element
 import ElementUI from 'element-ui'
@@ -24,6 +25,7 @@ import 'swiper/dist/css/swiper.css'
 Vue.prototype.$https = https
 Vue.prototype.$utils = utils
 Vue.prototype.$request = request
+Vue.prototype.$validate = validate
 
 // 开发环境下
 if (process.env.NODE_ENV === 'development') {
@@ -37,11 +39,11 @@ Vue.use(ElementUI)
 Vue.use(VueAwesomeSwiper)
 
 // 判断登录状态
-/* router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token') || null
   const username = localStorage.getItem('username') || null
 
-  if (token == null && (to.path !== '/login')) {
+  if (token == null && to.path !== '/login') {
     next({ path: '/login' })
   } else {
     store.commit('setUser', {
@@ -50,10 +52,10 @@ Vue.use(VueAwesomeSwiper)
 
     next()
   }
-}) */
+})
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')

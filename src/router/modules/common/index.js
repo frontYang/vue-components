@@ -1,4 +1,3 @@
-
 import Common from '@/views/Common/Index'
 import Dragtime from '@/views/Common/Dragtime/Index'
 import Dragtime2 from '@/views/Common/Dragtime2/Index'
@@ -10,6 +9,7 @@ import Cascader2 from '@/views/Common/Cascader2/Index'
 import TreeSearch from '@/views/Common/TreeSearch/Index'
 import CalendarCustom from '@/views/Common/CalendarCustom/Index'
 import Editor from '@/views/Common/Editor/Index'
+import H5 from '@/views/Common/H5/Index'
 
 // 子路由
 export default {
@@ -98,6 +98,14 @@ export default {
       component: Editor,
       meta: {
         title: '富文本编辑器（背景图片）'
+      }
+    },
+    {
+      path: '/common/h5',
+      name: 'h5',
+      component: H5,
+      meta: {
+        title: 'h5可视化'
       }
     }
   ]

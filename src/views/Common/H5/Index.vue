@@ -1,22 +1,27 @@
 <template>
   <div class="page">
-
+    <ui-h5 />
   </div>
 </template>
 
 <script>
+import UiH5 from '@/components/UiH5/Index'
+import { mapState } from 'vuex'
+
 export default {
-  data() {
-    return {
-
-    }
-  },
+  name: 'h5',
   components: {
-
+    'ui-h5': UiH5
   },
-  mounted() {}
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapState(['h5'])
+  },
+  mounted() { },
+  methods: {}
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

@@ -1,13 +1,11 @@
 {
-  "printWidth": 120, // 一行最大多少字符
-  "tabWidth": 2, // tab占用的字符数
-  "useTabs": false, // 是否使用tab代替空格
-  "semi": false, // 是否每句后都加分号
-  "singleQuote": true, // 是否使用单引号
-  "jsxSingleQuote": false, // jsx是否使用单引号
-  "trailingComma": "none", // 数组尾逗号。
-  "bracketSpacing": false, // {foo: xx}还是{ foo: xx }
-  "jsxBracketSameLine": false, //看官网
-  "quoteProps": "consistent", // 属性引号，只要有一个需要时，其他都加
-  "arrowParens": "always" //箭头函数参数是否使用（）
+  "printWidth": 200,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "quoteProps": "consistent",
+  "arrowParens": "always"
 }

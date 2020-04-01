@@ -1,16 +1,16 @@
 <template>
-	<div class="page page-login">
+  <div class="page page-login">
     <div class="box-th">系统登录</div>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
       <el-form-item label="" prop="username">
-        <el-input v-model="ruleForm.username" placeholder="用户名"/>
+        <el-input v-model="ruleForm.username" placeholder="用户名" />
       </el-form-item>
       <el-form-item label="" prop="password">
         <el-input v-model="ruleForm.password" type="password" placeholder="密码" />
       </el-form-item>
       <el-button type="primary" size="large" @click="submitForm('ruleForm')">提交</el-button>
     </el-form>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -40,49 +40,42 @@ export default {
       }
     }
   },
-  components: {
-
-  },
   computed: {
-    ...mapState([
-      'login'
-    ])
+    ...mapState(['login'])
   },
   methods: {
-    ...mapMutations([
-      'setUser'
-    ]),
+    ...mapMutations(['setUser']),
 
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$request.login({
-            username: this.ruleForm.username,
-            password: this.ruleForm.password
-          }).then(res => {
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('username', res.data.username)
-            this.setUser({
-              username: res.data.username
+          this.$request
+            .login({
+              username: this.ruleForm.username,
+              password: this.ruleForm.password
             })
-            this.$router.push('/index')
-          })
+            .then((res) => {
+              localStorage.setItem('token', res.data.token)
+              localStorage.setItem('username', res.data.username)
+              this.setUser({
+                username: res.data.username
+              })
+              this.$router.push('/index')
+            })
         } else {
           console.log('error submit!!')
           return false
         }
       })
     }
-
   },
-  mounted() {
-  }
+  mounted() {}
 }
 </script>
 
 <style lang="scss">
-.page-login{
-	background: #fff;
+.page-login {
+  background: #fff;
   text-align: center;
   position: absolute;
   top: 50%;
@@ -95,18 +88,17 @@ export default {
   min-width: 320px;
   max-width: 500px;
   border-radius: 5px;
-  .box-th{
+  .box-th {
     font-weight: bold;
     font-size: 24px;
     padding-bottom: 26px;
   }
-  .el-form{
+  .el-form {
     width: 85%;
     margin: 0 auto;
   }
-  .el-button{
+  .el-button {
     width: 100%;
   }
 }
 </style>
-

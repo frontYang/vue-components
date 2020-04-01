@@ -17,6 +17,6 @@ export const DOMAIN = IS_DEV ? DOMAIN_DEV : DOMAIN_PROD
 export const CONFIG = {
   // 接口
   intf: {
+    login: '/api/test/login'
   }
-
 }
