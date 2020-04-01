@@ -19,7 +19,7 @@ export default {
   computed: {
     ...mapState(['h5'])
   },
-  mounted() { },
+  mounted() {},
   methods: {}
 }
 </script>
