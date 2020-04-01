@@ -58,6 +58,7 @@
     "*.{js,vue}": [
       "prettier --write",
       "vue-cli-service lint",
+      "eslint --fix",
       "git add"
     ]
   }
