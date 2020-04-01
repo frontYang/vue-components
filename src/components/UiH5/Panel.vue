@@ -4,13 +4,24 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   data() {
     return {}
   },
-  components: {},
-  mounted() {}
+  computed: {
+    ...mapState(['h5'])
+  },
+  mounted() {},
+  methods: {
+    ...mapMutations(['setElement'])
+  }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.ui-h5__view {
+  width: 375px;
+}
+</style>

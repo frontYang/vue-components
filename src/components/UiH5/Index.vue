@@ -3,7 +3,7 @@
     <div class="box box-elements f-flex-left">
       <elements />
     </div>
-    <div class="box box-view">
+    <div class="box box-panel">
       <panel />
     </div>
     <div class="box box-config f-flex-right">
@@ -16,36 +16,39 @@
 import Config from './Config'
 import Panel from './Panel'
 import Elements from './Elements'
-import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: {
     config: Config,
     panel: Panel,
     elements: Elements
-  },
-  data() {
-    return {}
-  },
-  computed: {
-    ...mapState(['h5'])
-  },
-  mounted() {}
+  }
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/styles/_common.scss';
 .ui-h5 {
+  background: #f1f1f1;
   width: 100vw;
   height: 100vh;
-  // border-radius: 5px;
+  border-radius: 5px;
   box-sizing: border-box;
   .box {
-    &.box-view {
-      border-left: 1px solid #ddd;
-      border-right: 1px solid #ddd;
-      width: 50%;
+    &.box-elements,
+    &.box-config {
+      background: #fff;
+      flex-grow: 0;
+    }
+    &.box-elements {
+      width: 258px;
+    }
+    &.box-config {
+      width: 320px;
+    }
+    &.box-panel {
+      min-width: 375px;
+      flex-grow: 3;
     }
   }
 }

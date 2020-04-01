@@ -8,7 +8,9 @@ export const splicing = (list) => {
   const len = list.length
   const arr = []
 
-  if (!len) { return }
+  if (!len) {
+    return
+  }
   while (++i < len) {
     const item = list[i]
     if (item.check) {
@@ -30,7 +32,7 @@ export const splicing = (list) => {
  */
 export const oneToMoreArr = function(arr, num = 2) {
   const len = arr.length
-  const lineNum = len % num === 0 ? len / num : Math.floor((len / num) + 1)
+  const lineNum = len % num === 0 ? len / num : Math.floor(len / num + 1)
   const res = []
   for (let i = 0; i < lineNum; i++) {
     const temp = arr.slice(i * num, i * num + num)
@@ -66,8 +68,8 @@ export const getResult = (range, weekData, Vue) => {
 
         filterArr[item.id] = filterArr[item.id] || []
 
-        begin.length > 0 && (filterArr[item.id].push(...begin))
-        end.length > 0 && (filterArr[item.id].push(...end))
+        begin.length > 0 && filterArr[item.id].push(...begin)
+        end.length > 0 && filterArr[item.id].push(...end)
       })
     })
     return filterArr
@@ -79,7 +81,7 @@ export const getResult = (range, weekData, Vue) => {
   const getNumArr = function(filterArr) {
     const numArr = []
     filterArr.forEach((item, index) => {
-      const mapVal = item.map(m => m.col)
+      const mapVal = item.map((m) => m.col)
       numArr[index] = numArr[index] || []
       numArr[index] = Vue.$utils.oneToMoreArr(mapVal, 2)
     })
@@ -93,7 +95,7 @@ export const getResult = (range, weekData, Vue) => {
     const allTimeData = []
     numArr.forEach((item, index) => {
       allTimeData[index] = allTimeData[index] || []
-      item.forEach(a => {
+      item.forEach((a) => {
         if (a[0] === a[1]) {
           allTimeData[index].push(...new Set(a))
         } else {
@@ -159,10 +161,10 @@ export const loadImage = (src) => {
  * @param {Object} Vue vue示例
  */
 export const computeChild = (list, prop, Vue) => {
-  list.forEach(item => {
+  list.forEach((item) => {
     if (item[prop.children] && item[prop.children].length) {
       const child = item[prop.children]
-      if (child.every(ret => ret[prop.check])) {
+      if (child.every((ret) => ret[prop.check])) {
         Vue.$set(item, [prop.check], true)
       } else {
         Vue.$set(item, [prop.check], false)
@@ -189,7 +191,9 @@ export const getIdOfData = (list, prop, id) => {
       break
     } else if (item[prop.children] && item[prop.children].length) {
       const res = getIdOfData(item[prop.children], prop, id)
-      if (res[prop.id]) { return res }
+      if (res[prop.id]) {
+        return res
+      }
     }
   }
 
@@ -270,12 +274,14 @@ export const selectCheck = ({ data, selected, prop, check }) => {
  * 树形数组模糊搜索————返回链式字符串数组
  */
 export const findTreeStr = (data, prop, value) => {
-  if (!data || data.length <= 0) { return }
+  if (!data || data.length <= 0) {
+    return
+  }
 
   const fn = (item, value, first) => {
     const newArr = []
-    item.forEach(inner => {
-      let str = first ? (first + ' / ') : ''
+    item.forEach((inner) => {
+      let str = first ? first + ' / ' : ''
       str += value + ' / ' + inner.value
       newArr.push({
         path_name: str,
@@ -292,22 +298,23 @@ export const findTreeStr = (data, prop, value) => {
 
   let arr = []
 
-  data.forEach(item => {
-    let str = value ? (value + ' / ') : ''
+  data.forEach((item) => {
+    let str = value ? value + ' / ' : ''
     str += item.value
 
-    !value && arr.push({
-      path_name: str,
-      pid: item.pid,
-      index: item.index,
-      [prop.id]: item[prop.id],
-      [prop.value]: item[prop.value],
-      [prop.check]: item[prop.check],
-      [prop.children]: findTreeStr(item[prop.children], prop, str)
-    })
+    !value &&
+      arr.push({
+        path_name: str,
+        pid: item.pid,
+        index: item.index,
+        [prop.id]: item[prop.id],
+        [prop.value]: item[prop.value],
+        [prop.check]: item[prop.check],
+        [prop.children]: findTreeStr(item[prop.children], prop, str)
+      })
     if (item[prop.children] && item[prop.children].length > 0) {
       arr = arr.concat(...fn(item[prop.children], item.value, value))
-      const str = value ? (value + '/' + item.value) : item.value
+      const str = value ? value + '/' + item.value : item.value
       arr = arr.concat(...findTreeStr(item[prop.children], prop, str))
     }
   })
@@ -319,7 +326,8 @@ export const findTreeStr = (data, prop, value) => {
  */
 export const findTreeFuzzy = ({
   val = '', // 搜索值
-  prop = { // key值
+  prop = {
+    // key值
     check: 'check',
     children: 'children',
     id: 'id',
@@ -329,7 +337,9 @@ export const findTreeFuzzy = ({
   pid = -1, // 父id
   isStr = true // 是否返回拼接名称数组
 }) => {
-  if (val === '' || !data || data.length <= 0) { return }
+  if (val === '' || !data || data.length <= 0) {
+    return
+  }
   const newarr = []
   data.forEach((element, index) => {
     if (element.value.indexOf(val) !== -1) {
@@ -367,10 +377,7 @@ export const findTreeFuzzy = ({
  * @param {Number} year 年份
  * @param {Number} month 月份
  */
-export const getDaysInMonth = ({
-  year = new Date().getFullYear(),
-  month = new Date().getMonth() + 1
-}) => {
+export const getDaysInMonth = ({ year = new Date().getFullYear(), month = new Date().getMonth() + 1 }) => {
   const daysOfMonth = []
   const lastDayOfMonth = new Date(year, month, 0).getDate()
 
@@ -403,4 +410,23 @@ export const formatTime = (time = new Date()) => {
     minutes: time.getMinutes(),
     seconds: time.getSeconds()
   }
+}
+
+/**
+ * 深度拷贝
+ */
+export const deepCopy = (data) => {
+  let dataTmp
+
+  if (data === null || !(typeof data === 'object')) {
+    dataTmp = data
+  } else {
+    dataTmp = data.constructor.name === 'Array' ? [] : {}
+
+    for (const key in data) {
+      dataTmp[key] = deepCopy(data[key])
+    }
+  }
+
+  return dataTmp
 }
