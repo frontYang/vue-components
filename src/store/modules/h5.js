@@ -19,7 +19,7 @@ const mutations = {
 
       case 'modify':
         // 修改
-
+        state.elements[data.current] = [...data.element]
         break
 
       case 'delete':

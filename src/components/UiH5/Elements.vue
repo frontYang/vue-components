@@ -45,15 +45,19 @@ export default {
 @import '@/assets/styles/_common.scss';
 
 .ui-h5__elements {
+  min-height: 667px;
+  overflow-y: auto;
   padding: 0 0;
   .elements-box {
     flex-wrap: wrap;
 
     .elements-item {
       box-sizing: border-box;
-      width: 112px;
+      // width: 112px;
+      width: 80%;
       padding: 20px;
-      margin: 10px 0 0 10px;
+      // margin: 10px 0 0 10px;
+      margin: 20px auto 0;
       text-align: center;
       color: $primary;
       border: 1px dashed #ddd;

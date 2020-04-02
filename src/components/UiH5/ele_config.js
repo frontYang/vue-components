@@ -4,13 +4,13 @@ const commonConfig = [
     prop: 'x',
     value: 0,
     field: 'input-number',
-    label: 'x轴'
+    label: 'x'
   },
   {
     prop: 'y',
     value: 0,
     field: 'input-number',
-    label: 'y轴'
+    label: 'y'
   },
   {
     prop: 'width',
@@ -41,67 +41,114 @@ const commonConfig = [
 // 边框样式
 const borderConfig = [
   {
-    prop: 'background',
-    value: 'transparent',
-    label: '背景'
-  },
-  {
     prop: 'borderWidth',
     value: 1,
     field: 'input-number',
-    label: '边框宽度'
-  },
-  {
-    prop: 'borderStyle',
-    value: 'solid',
-    field: 'select',
-    label: '边框样式'
-  },
-  {
-    prop: 'borderColor',
-    value: '#333',
-    label: '边框颜色'
+    label: '宽度'
   },
   {
     prop: 'borderRadius',
     value: 0,
     field: 'input-number',
-    label: '边框弧度'
+    label: '弧度'
+  },
+  {
+    prop: 'borderStyle',
+    value: null,
+    field: 'select',
+    options: ['solid', 'dashed', 'dotted'],
+    label: '样式'
+  },
+  {
+    prop: 'borderColor',
+    value: '#333',
+    field: 'color-picker',
+    label: '颜色'
+  },
+  {
+    prop: 'background',
+    value: null,
+    field: 'color-picker',
+    label: '背景'
   }
 ]
 
 // 字体样式
 const fontConfig = [
   {
-    prop: 'fontSize',
-    value: 12,
-    field: 'input-number',
-    label: '字体大小'
-  },
-  {
-    prop: 'color',
-    value: '#333',
-    field: 'input',
-    label: '字体颜色'
-  },
-  {
     prop: 'text',
     value: '',
     field: 'input',
     label: '文案'
+  },
+  {
+    prop: 'fontSize',
+    value: 12,
+    field: 'input-number',
+    label: '大小'
+  },
+  {
+    prop: 'color',
+    value: '#333',
+    field: 'color-picker',
+    label: '颜色'
   }
 ]
 
 export default {
   // 块
-  block: [...commonConfig, ...borderConfig],
+  block: [
+    {
+      type: 'border',
+      group: '边框设置',
+      data: borderConfig
+    },
+    {
+      type: 'base',
+      group: '基础设置',
+      data: commonConfig
+    }
+  ],
 
   // 图片
-  picture: [...commonConfig],
+  picture: [
+    {
+      type: 'base',
+      group: '基础设置',
+      data: commonConfig
+    }
+  ],
 
   // 文本
-  text: [...fontConfig, ...commonConfig],
+  text: [
+    {
+      type: 'text',
+      group: '文本设置',
+      data: fontConfig
+    },
+    {
+      type: 'base',
+      group: '基础设置',
+      data: commonConfig
+    }
+  ],
 
   // 按钮
-  button: [...fontConfig, ...borderConfig, ...commonConfig]
+  button: [
+    {
+      type: 'text',
+      group: '文本设置',
+      data: fontConfig
+    },
+    {
+      type: 'border',
+      group: '边框设置',
+      data: borderConfig
+    },
+    {
+      type: 'base',
+      group: '基础设置',
+      data: commonConfig
+    }
+  ]
 }
