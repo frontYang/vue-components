@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const state = {
   // 组件索引
   current: '',
@@ -13,18 +15,18 @@ const mutations = {
     switch (data.status) {
       case 'init':
         // 初始化
-        state.elements.push([...data.element])
+        Vue.set(state.elements, state.elements.length, data.element)
         state.current = state.elements.length - 1
         break
 
       case 'modify':
         // 修改
-        state.elements[data.current] = [...data.element]
+        Vue.set(state.elements, data.current, data.element)
         break
 
       case 'delete':
         // 删除
-
+        state.elements.splice(data.current)
         break
 
       default:

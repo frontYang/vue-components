@@ -54,7 +54,7 @@ const borderConfig = [
   },
   {
     prop: 'borderStyle',
-    value: null,
+    value: 0,
     field: 'select',
     options: ['solid', 'dashed', 'dotted'],
     label: '样式'
@@ -67,7 +67,7 @@ const borderConfig = [
   },
   {
     prop: 'background',
-    value: null,
+    value: 0,
     field: 'color-picker',
     label: '背景'
   }
@@ -77,7 +77,7 @@ const borderConfig = [
 const fontConfig = [
   {
     prop: 'text',
-    value: '',
+    value: '输入文案',
     field: 'input',
     label: '文案'
   },
@@ -92,6 +92,15 @@ const fontConfig = [
     value: '#333',
     field: 'color-picker',
     label: '颜色'
+  }
+]
+
+const imageConfig = [
+  {
+    label: '',
+    value: '',
+    field: 'upload',
+    prop: 'image'
   }
 ]
 
@@ -112,6 +121,11 @@ export default {
 
   // 图片
   picture: [
+    {
+      type: 'upload',
+      group: '图片上传',
+      data: imageConfig
+    },
     {
       type: 'base',
       group: '基础设置',

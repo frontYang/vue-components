@@ -34,7 +34,10 @@ export default {
     nodeClick(type) {
       this.setElement({
         status: 'init',
-        element: eleConfigs[type]
+        element: {
+          type: type,
+          node: eleConfigs[type]
+        }
       })
     }
   }

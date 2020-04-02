@@ -52,6 +52,7 @@ export default {
   border-radius: 5px;
   box-sizing: border-box;
   .box {
+    position: relative;
     &.box-elements,
     &.box-config {
       background: #fff;
