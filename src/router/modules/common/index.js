@@ -10,6 +10,7 @@ import TreeSearch from '@/views/Common/TreeSearch/Index'
 import CalendarCustom from '@/views/Common/CalendarCustom/Index'
 import Editor from '@/views/Common/Editor/Index'
 import H5 from '@/views/Common/H5/Index'
+import UploadGroup from '@/views/Common/UploadGroup/Index'
 
 // 子路由
 export default {
@@ -106,6 +107,14 @@ export default {
       component: H5,
       meta: {
         title: 'h5可视化'
+      }
+    },
+    {
+      path: '/common/upload_group',
+      name: 'UploadGroup',
+      component: UploadGroup,
+      meta: {
+        title: '头条上传组件'
       }
     }
   ]

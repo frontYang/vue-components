@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page page-upload-group">
     <ui-upload-group />
   </div>
 </template>
@@ -8,18 +8,17 @@
 import UiUploadGroup from '@/components/UiUploadGroup/Index'
 export default {
   data() {
-    return {
-
-    }
+    return {}
   },
   components: {
     'ui-upload-group': UiUploadGroup
   },
-  mounted() {
-
-  }
+  mounted() {}
 }
 </script>
 
 <style scoped lang="scss">
+.page-upload-group {
+  padding: 20px;
+}
 </style>
