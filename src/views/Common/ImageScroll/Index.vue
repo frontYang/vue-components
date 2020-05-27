@@ -7,17 +7,14 @@
 <script>
 import UiImageScroll from '@/components/UiImageScroll/Index'
 export default {
-  data() {
-    return {
-
-    }
-  },
   components: {
     'ui-image-scroll': UiImageScroll
+  },
+  data() {
+    return {}
   },
   mounted() {}
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

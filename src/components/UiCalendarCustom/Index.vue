@@ -1,13 +1,29 @@
 <template>
   <div class="ui-calendar-custom">
-    <el-checkbox v-model="checkAll[curTime]" :indeterminate="isIndeterminate" @change="checkAllChange">全选</el-checkbox>
+    <el-checkbox
+      v-model="checkAll[curTime]"
+      :indeterminate="isIndeterminate"
+      @change="checkAllChange"
+    >
+      全选
+    </el-checkbox>
 
-    <el-checkbox-group v-model="weekValue[curTime]" @change="clickWeek" >
-      <el-checkbox v-for="(item, index) in weekLabel" :key="item" :label="index">{{ item }}</el-checkbox>
+    <el-checkbox-group v-model="weekValue[curTime]" @change="clickWeek">
+      <el-checkbox
+        v-for="(item, index) in weekLabel"
+        :key="item"
+        :label="index"
+      >
+        {{ item }}
+      </el-checkbox>
     </el-checkbox-group>
     <el-calendar ref="elCalendar" v-model="dateValue" :first-day-of-week="0">
-      <template v-slot:dateCell="{date, data}">
-        <div :class="currentCls(data)" @click="selectDay(data)" v-html="dateLabel(data)"></div>
+      <template v-slot:dateCell="{ date, data }">
+        <div
+          :class="currentCls(data)"
+          @click="selectDay(data)"
+          v-html="dateLabel(data)"
+        />
       </template>
     </el-calendar>
   </div>
@@ -36,28 +52,38 @@ export default {
   },
   computed: {
     isIndeterminate() {
-      return this.weekValue[this.curTime] && this.weekValue[this.curTime].length > 0 && !this.checkAll
+      return (
+        this.weekValue[this.curTime] &&
+        this.weekValue[this.curTime].length > 0 &&
+        !this.checkAll
+      )
     },
 
     // 选中样式
     currentCls() {
-      return item => {
-        return this.selectDayArr.includes(`${item.day}`) ? 'date-cell is-selected' : 'date-cell'
+      return (item) => {
+        return this.selectDayArr.includes(`${item.day}`)
+          ? 'date-cell is-selected'
+          : 'date-cell'
       }
     },
 
     // 日历文案自定义显示
     dateLabel() {
-      return item => {
+      return (item) => {
         const value = item.day.split('-').slice(2)
-        const checked = this.selectDayArr.includes(`${item.day}`) ? `<span>${this.stateLabel[0]}</span>` : `<span>${this.stateLabel[1]}</span>`
+        const checked = this.selectDayArr.includes(`${item.day}`)
+          ? `<span>${this.stateLabel[0]}</span>`
+          : `<span>${this.stateLabel[1]}</span>`
         return `<span>${value}</span>` + checked
       }
     },
 
     // 当前年月，用来记录周期位置
     curTime() {
-      const now = this.$utils.formatTime(this.dateValue !== '' ? this.dateValue : new Date())
+      const now = this.$utils.formatTime(
+        this.dateValue !== '' ? this.dateValue : new Date()
+      )
       return `${now.year}-${now.month}`
     }
   },
@@ -80,13 +106,17 @@ export default {
     weekValue: {
       handler() {
         this.weekData = []
-        const formatValue = this.$utils.formatTime(this.dateValue !== '' ? this.dateValue : new Date())
+        const formatValue = this.$utils.formatTime(
+          this.dateValue !== '' ? this.dateValue : new Date()
+        )
         const daysInMonth = this.$utils.getDaysInMonth({
           year: formatValue.year,
           month: formatValue.month
         })
         this.weekValue[this.curTime].forEach((item, index) => {
-          const daysInMonthData = daysInMonth.filter(v => v.day === item).map(m => m.format)
+          const daysInMonthData = daysInMonth
+            .filter((v) => v.day === item)
+            .map((m) => m.format)
           daysInMonthData.forEach((item) => {
             this.updateWeekDate({
               isSelected: false,
@@ -120,9 +150,15 @@ export default {
     /* 绑定切换事件 */
     bindBtn() {
       this.$nextTick(() => {
-        const prevBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(1)')
-        const currentBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(2)')
-        const nextBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(3)')
+        const prevBtn = document.querySelector(
+          '.el-calendar__button-group .el-button-group>button:nth-child(1)'
+        )
+        const currentBtn = document.querySelector(
+          '.el-calendar__button-group .el-button-group>button:nth-child(2)'
+        )
+        const nextBtn = document.querySelector(
+          '.el-calendar__button-group .el-button-group>button:nth-child(3)'
+        )
         prevBtn.addEventListener('click', () => {
           this.changeMonth('prev')
         })
@@ -137,9 +173,15 @@ export default {
 
     /* 解除事件绑定 */
     unbindBtn() {
-      const prevBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(1)')
-      const currentBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(2)')
-      const nextBtn = document.querySelector('.el-calendar__button-group .el-button-group>button:nth-child(3)')
+      const prevBtn = document.querySelector(
+        '.el-calendar__button-group .el-button-group>button:nth-child(1)'
+      )
+      const currentBtn = document.querySelector(
+        '.el-calendar__button-group .el-button-group>button:nth-child(2)'
+      )
+      const nextBtn = document.querySelector(
+        '.el-calendar__button-group .el-button-group>button:nth-child(3)'
+      )
       prevBtn.removeEventListener('click', this.changeMonth)
       currentBtn.removeEventListener('click', this.changeMonth)
       nextBtn.removeEventListener('click', this.changeMonth)
@@ -147,24 +189,31 @@ export default {
 
     /* 初始化计算 */
     initWeek() {
-      const formatValue = this.$utils.formatTime(this.dateValue !== '' ? this.dateValue : new Date())
+      const formatValue = this.$utils.formatTime(
+        this.dateValue !== '' ? this.dateValue : new Date()
+      )
       const daysInMonth = this.$utils.getDaysInMonth({
         year: formatValue.year,
         month: formatValue.month
       })
 
-      const curDays = daysInMonth.map(m => m.day)
+      const curDays = daysInMonth.map((m) => m.day)
       const selectSumArr = []
-      const selectedDate = daysInMonth.filter(m => this.value.includes(m.format)).map(m => m.day)
+      const selectedDate = daysInMonth
+        .filter((m) => this.value.includes(m.format))
+        .map((m) => m.day)
       const defaultSumArr = []
       for (let i = 0; i < 7; i++) {
-        defaultSumArr.push(curDays.filter(m => m === i).length)
-        selectSumArr.push(selectedDate.filter(m => m === i).length)
+        defaultSumArr.push(curDays.filter((m) => m === i).length)
+        selectSumArr.push(selectedDate.filter((m) => m === i).length)
       }
 
       // 本周全选
       for (let i = 0; i < selectSumArr.length; i++) {
-        if (selectSumArr[i] === defaultSumArr[i] && !this.weekValue[this.curTime].includes(i)) {
+        if (
+          selectSumArr[i] === defaultSumArr[i] &&
+          !this.weekValue[this.curTime].includes(i)
+        ) {
           this.weekValue[this.curTime].push(i)
         }
       }
@@ -178,7 +227,9 @@ export default {
         month: formatValue.month
       })
       this.weekValue[this.curTime].forEach((item) => {
-        const daysInMonthData = daysInMonth.filter(v => v.day === item).map(m => m.format)
+        const daysInMonthData = daysInMonth
+          .filter((v) => v.day === item)
+          .map((m) => m.format)
         daysInMonthData.forEach((item) => {
           this.updateWeekDate({
             isSelected: false,
@@ -201,7 +252,8 @@ export default {
 
     /* 周期选择 */
     clickWeek(val) {
-      this.checkAll = this.weekValue[this.curTime].length === this.weekLabel.length
+      this.checkAll =
+        this.weekValue[this.curTime].length === this.weekLabel.length
     },
 
     updateWeekDate(data) {
@@ -225,24 +277,24 @@ export default {
 </script>
 
 <style lang="scss">
-.ui-calendar-custom{
-  .date-cell{
+.ui-calendar-custom {
+  .date-cell {
     text-align: center;
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
-    &.is-selected{
-      background-color: #F2F8FE;
+    &.is-selected {
+      background-color: #f2f8fe;
     }
-    span{
+    span {
       display: block;
     }
   }
-  .el-calendar-table tr:first-child td{
+  .el-calendar-table tr:first-child td {
     padding: 0;
   }
 
-  .el-calendar-table .el-calendar-day{
+  .el-calendar-table .el-calendar-day {
     padding: 0;
   }
 }

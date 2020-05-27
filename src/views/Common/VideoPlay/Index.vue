@@ -7,17 +7,14 @@
 <script>
 import UiVideoPlay from '@/components/UiVideoPlay/Index'
 export default {
-  data() {
-    return {
-
-    }
-  },
   components: {
     'ui-video-play': UiVideoPlay
+  },
+  data() {
+    return {}
   },
   mounted() {}
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

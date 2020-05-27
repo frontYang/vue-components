@@ -3,17 +3,21 @@
   <el-form class="ui-input-search">
     <el-input
       v-model="searchVal"
-      @input="input"
       class="input-search"
       prefix-icon="el-icon-search"
       placeholder="请输入"
       clearable
+      @input="input"
       @clear="clear"
-    ></el-input>
-    <el-card class="list-search" v-if="showList" v-loading="loading">
+    />
+    <el-card v-if="showList" v-loading="loading" class="list-search">
       <ul>
         <template v-if="list.length > 0">
-          <li @click.stop="selected(index)" v-for="(item, index) in list" :key="index">
+          <li
+            v-for="(item, index) in list"
+            :key="index"
+            @click.stop="selected(index)"
+          >
             <p class="label">{{ item.path_name || item.name }}</p>
           </li>
         </template>
@@ -116,7 +120,7 @@ export default {
 </script>
 
 <style scope lang="scss">
-@import '@/assets/styles/_common.scss';
+@import "@/assets/styles/_common.scss";
 .ui-input-search {
   &.el-form {
     position: relative;

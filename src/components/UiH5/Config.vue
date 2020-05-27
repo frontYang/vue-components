@@ -2,11 +2,23 @@
   <!-- 配置 -->
   <div class="ui-h5__config">
     <el-form size="small" label-position="right" :inline="true">
-      <el-collapse v-for="(item, index) in curEle.node" :key="index" v-model="collName">
+      <el-collapse
+        v-for="(item, index) in curEle.node"
+        :key="index"
+        v-model="collName"
+      >
         <el-collapse-item :title="item.group" :name="index">
-          <el-form-item v-for="(eleItem, eleIndex) in item.data" :key="eleIndex" :label="`${eleItem.label}`">
+          <el-form-item
+            v-for="(eleItem, eleIndex) in item.data"
+            :key="eleIndex"
+            :label="`${eleItem.label}`"
+          >
             <!-- input -->
-            <el-input v-if="eleItem.field === 'input'" v-model="eleItem.value" :placeholder="eleItem.label" />
+            <el-input
+              v-if="eleItem.field === 'input'"
+              v-model="eleItem.value"
+              :placeholder="eleItem.label"
+            />
 
             <!-- input-number -->
             <el-input-number
@@ -17,13 +29,17 @@
             />
 
             <!-- select -->
-            <el-select v-else-if="eleItem.field === 'select'" v-model="eleItem.value" :placeholder="eleItem.label">
+            <el-select
+              v-else-if="eleItem.field === 'select'"
+              v-model="eleItem.value"
+              :placeholder="eleItem.label"
+            >
               <el-option
                 v-for="(eleItem, index) in eleItem.options"
                 :key="index"
                 :label="eleItem"
                 :value="eleItem"
-              ></el-option>
+              />
             </el-select>
 
             <!-- color-picker -->
@@ -42,7 +58,14 @@
       </el-collapse>
 
       <!-- 删除组件按钮 -->
-      <el-button v-if="showDeleteBtn" class="btn-delete" @click="deleteEle" type="danger" icon="el-icon-delete" round>
+      <el-button
+        v-if="showDeleteBtn"
+        class="btn-delete"
+        type="danger"
+        icon="el-icon-delete"
+        round
+        @click="deleteEle"
+      >
         删除组件
       </el-button>
     </el-form>
@@ -68,11 +91,12 @@ export default {
   watch: {
     'h5.current': {
       handler() {
-        this.curEle = this.$utils.deepCopy(this.h5.elements[this.h5.current]) || []
+        this.curEle =
+          this.$utils.deepCopy(this.h5.elements[this.h5.current]) || []
         // this.curEle = this.h5.elements[this.h5.current] || []
       }
     },
-    'curEle': {
+    curEle: {
       handler() {
         const isDel = this.curEle.node.length === 0
         this.setElement({

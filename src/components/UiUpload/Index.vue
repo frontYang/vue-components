@@ -1,21 +1,23 @@
 <template>
   <div class="ui-upload">
     <el-upload action="">
-      <el-button type="primary"></el-button>
+      <el-button type="primary" />
     </el-upload>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ui-upload',
+  name: 'UiUpload',
+  components: {},
   props: {
-    classify: {}
+    classify: {
+      type: String
+    }
   },
   data() {
     return {}
   },
-  components: {},
   mounted() {}
 }
 </script>

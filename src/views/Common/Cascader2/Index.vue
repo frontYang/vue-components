@@ -9,9 +9,13 @@
       :is-multi-first="false"
     />
     <p>选中数据：</p>
-    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{selectedData}}</pre>
+    <pre style="border: 1px solid #ddd; max-height: 200px; overflow: auto;">{{
+      selectedData
+    }}</pre>
     <p>选中id:</p>
-    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{JSON.stringify(selectedIdArr)}}</pre>
+    <pre style="border: 1px solid #ddd; max-height: 200px; overflow: auto;">{{
+      JSON.stringify(selectedIdArr)
+    }}</pre>
   </div>
 </template>
 
@@ -20,6 +24,9 @@ import UiCascader from '@/components/UiCascader/Index'
 import cityData from './city.json'
 
 export default {
+  components: {
+    'ui-cascader': UiCascader
+  },
   data() {
     return {
       cityData: cityData,
@@ -27,12 +34,7 @@ export default {
       selectedIdArr: []
     }
   },
-  components: {
-    'ui-cascader': UiCascader
-  },
-  computed: {
-
-  },
+  computed: {},
   watch: {
     selectedIdArr() {
       this.selectedData = this.$refs['cascader'].selectedData
@@ -41,5 +43,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

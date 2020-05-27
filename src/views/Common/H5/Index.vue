@@ -9,7 +9,7 @@ import UiH5 from '@/components/UiH5/Index'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'h5',
+  name: 'H5',
   components: {
     'ui-h5': UiH5
   },

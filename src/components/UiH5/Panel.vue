@@ -13,7 +13,7 @@ import DragBox from './DragBox'
 import BaseText from './BaseUi/BaseText'
 
 export default {
-  name: 'panel',
+  name: 'Panel',
   components: {
     'drag-box': DragBox,
     'base-text': BaseText

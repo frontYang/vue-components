@@ -1,14 +1,30 @@
 <template>
   <div class="page page-login">
     <div class="box-th">系统登录</div>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="0">
+    <el-form
+      ref="ruleForm"
+      :model="ruleForm"
+      status-icon
+      :rules="rules"
+      label-width="0"
+    >
       <el-form-item label="" prop="username">
         <el-input v-model="ruleForm.username" placeholder="用户名" />
       </el-form-item>
       <el-form-item label="" prop="password">
-        <el-input v-model="ruleForm.password" type="password" placeholder="密码" />
+        <el-input
+          v-model="ruleForm.password"
+          type="password"
+          placeholder="密码"
+        />
       </el-form-item>
-      <el-button type="primary" size="large" @click="submitForm('ruleForm')">提交</el-button>
+      <el-button
+        type="primary"
+        size="large"
+        @click="submitForm('ruleForm')"
+      >
+        提交
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -17,7 +33,7 @@
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-  name: 'login',
+  name: 'Login',
   data() {
     return {
       ruleForm: {
@@ -68,8 +84,7 @@ export default {
         }
       })
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 

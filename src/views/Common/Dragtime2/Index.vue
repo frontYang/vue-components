@@ -3,7 +3,9 @@
     <h2>只展示一天的时间点</h2>
     <ui-dragtime v-model="timeRange" :data="weekData" @on-clear="clearTime" />
     <p>提交数据：</p>
-    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{JSON.stringify(result)}}</pre>
+    <pre style="border: 1px solid #ddd; max-height: 200px; overflow: auto;">{{
+      JSON.stringify(result)
+    }}</pre>
   </div>
 </template>
 
@@ -13,6 +15,9 @@ import week from '@/utils/weektime_data'
 const weekData = week(['星期一'])
 
 export default {
+  components: {
+    'ui-dragtime': UiDragtime
+  },
   data() {
     return {
       drawer: false,
@@ -46,9 +51,6 @@ export default {
       return this.getTimeHighSetting()
     }
   },
-  components: {
-    'ui-dragtime': UiDragtime
-  },
   mounted() {},
   methods: {
     // 获取时间段
@@ -70,16 +72,23 @@ export default {
     },
 
     clearTime() {
-      this.weekData.forEach(item => {
-        item.child.forEach(t => {
+      this.weekData.forEach((item) => {
+        item.child.forEach((t) => {
           this.$set(t, 'check', false)
         })
       })
-      this.timeVal = { '0': [], '1': [], '2': [], '3': [], '4': [], '5': [], '6': [] }
+      this.timeVal = {
+        '0': [],
+        '1': [],
+        '2': [],
+        '3': [],
+        '4': [],
+        '5': [],
+        '6': []
+      }
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

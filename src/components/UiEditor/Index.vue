@@ -25,7 +25,10 @@ Quill.register('modules/ImageExtend', ImageExtend)
 Quill.register('modules/imageResize', ImageResize)
 
 export default {
-  name: 'ui-editor',
+  name: 'UiEditor',
+  components: {
+    'quill-editor': quillEditor
+  },
   props: {
     value: {
       type: Object,
@@ -77,12 +80,14 @@ export default {
         initCustom() {
           // 初始化背景按钮
           const bgImageButton = document.querySelector('.ql-image-bg')
-          bgImageButton.style.cssText = 'width:80px; border:1px solid #ccc; border-radius:5px;'
+          bgImageButton.style.cssText =
+            'width:80px; border:1px solid #ccc; border-radius:5px;'
           bgImageButton.innerText = 'background'
 
           // 初始化删除背景按钮
           const delBgButton = document.querySelector('.ql-del-bg')
-          delBgButton.style.cssText = 'width: 110px; margin-left: 5px; border:1px solid #ccc; border-radius:5px;'
+          delBgButton.style.cssText =
+            'width: 110px; margin-left: 5px; border:1px solid #ccc; border-radius:5px;'
           delBgButton.innerText = 'del background'
         }
       }
@@ -100,9 +105,6 @@ export default {
         this.value.bg = this.bg
       }
     }
-  },
-  components: {
-    'quill-editor': quillEditor
   },
   mounted() {
     this.editorOption.initCustom()
@@ -148,5 +150,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/_common.scss';
+@import "@/assets/styles/_common.scss";
 </style>

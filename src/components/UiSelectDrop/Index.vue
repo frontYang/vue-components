@@ -1,21 +1,36 @@
 <template>
   <!-- 模拟选项下拉 -->
   <div class="ui-select-drop">
-    <el-select v-model="selectVal" :placeholder="placeholder" @blur="blur" @visible-change="visibleChange" filterable clearable>
-      <el-option v-for="(item, index) in data" :key="index" :label="item[prop.label]" :value="item[prop.value]">
-        {{item[prop.label]}}
+    <el-select
+      v-model="selectVal"
+      :placeholder="placeholder"
+      filterable
+      clearable
+      @blur="blur"
+      @visible-change="visibleChange"
+    >
+      <el-option
+        v-for="(item, index) in data"
+        :key="index"
+        :label="item[prop.label]"
+        :value="item[prop.value]"
+      >
+        {{ item[prop.label] }}
         <el-link
           class="link-preview"
           type="primary"
           :underline="false"
-          @click.stop="preview(item[prop.value])">预览</el-link>
+          @click.stop="preview(item[prop.value])"
+        >
+          预览
+        </el-link>
       </el-option>
     </el-select>
 
     <!-- 预览 -->
-    <div class="iframe-wrap" v-if="previewUrl !== ''">
+    <div v-if="previewUrl !== ''" class="iframe-wrap">
       <div class="iframe-wrap-inner">
-        <iframe :src="previewUrl"></iframe>
+        <iframe :src="previewUrl" />
       </div>
     </div>
   </div>
@@ -93,7 +108,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.ui-select-drop{
+.ui-select-drop {
   position: relative;
 
   .iframe-wrap {
@@ -116,25 +131,24 @@ export default {
     overflow: hidden;
     z-index: 99;
 
-    .iframe-wrap-inner{
+    .iframe-wrap-inner {
       width: 375px;
       height: 663px;
-      transform: scale(.4);
+      transform: scale(0.4);
       transform-origin: 0 0;
     }
 
-    iframe{
+    iframe {
       position: absolute;
-      top:0 ;
+      top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       border: none;
     }
   }
-
 }
-.link-preview{
+.link-preview {
   float: right;
 }
 </style>

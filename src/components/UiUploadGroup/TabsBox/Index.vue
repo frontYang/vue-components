@@ -1,7 +1,12 @@
 <template>
   <!-- 首层创意分类tab -->
   <div class="tabs-box f-flex">
-    <div v-for="(item, key) in tabs" :key="key" @click="toggleTab(key)" :class="itemCls(key)">
+    <div
+      v-for="(item, key) in tabs"
+      :key="key"
+      :class="itemCls(key)"
+      @click="toggleTab(key)"
+    >
       {{ item }}({{ contentLen[key] }})
     </div>
   </div>
@@ -21,6 +26,9 @@ export default {
       type: Object
     }
   },
+  data() {
+    return {}
+  },
   computed: {
     itemCls() {
       return (key) => {
@@ -29,9 +37,6 @@ export default {
         return cls
       }
     }
-  },
-  data() {
-    return {}
   },
   methods: {
     toggleTab(key) {
@@ -42,7 +47,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/_common';
+@import "@/assets/styles/_common";
 .tabs-box {
   height: 46px;
   line-height: 46px;

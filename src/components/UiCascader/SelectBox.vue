@@ -1,27 +1,51 @@
 <template>
   <div class="ui-cascader__box">
-    <div class="check-all" v-if="multi">
-      <div :class="disabled ? 'item-select cataract disabled' : 'item-select cataract'" @click="selectAll"></div>
-      <el-checkbox :disabled="disabled" class="check-item" :indeterminate="allIndeterminate" v-model="all">全选</el-checkbox>
-    </div>
-    <div v-for="item in data" :key="item[prop.id]" >
+    <div v-if="multi" class="check-all">
       <div
+        :class="
+          disabled ? 'item-select cataract disabled' : 'item-select cataract'
+        "
+        @click="selectAll"
+      />
+      <el-checkbox
+        v-model="all"
+        :disabled="disabled"
+        class="check-item"
+        :indeterminate="allIndeterminate"
+      >
+        全选
+      </el-checkbox>
+    </div>
+    <div v-for="item in data" :key="item[prop.id]">
+      <div
+        v-if="item[prop.children] && item[prop.children].length"
         :data-id="item[prop.id]"
         :data-name="item[prop.value]"
-        v-if="item[prop.children] && item[prop.children].length"
         :class="itemClasses(item)"
-        @click="!disabled && $emit('on-child', {item, level})"
+        @click="!disabled && $emit('on-child', { item, level })"
       >
-        <el-checkbox v-if="multi" :disabled="disabled" :indeterminate="itemIndeterminate(item)" v-model="item[prop.check]">{{item[prop.value]}}</el-checkbox>
-        <span class="check-item" v-else>{{item[prop.value]}}</span>
-        <i class="el-icon-arrow-right"></i>
-        <span class="item-checkbox cataract" @click="selectItem(item)"></span>
+        <el-checkbox
+          v-if="multi"
+          v-model="item[prop.check]"
+          :disabled="disabled"
+          :indeterminate="itemIndeterminate(item)"
+        >
+          {{ item[prop.value] }}
+        </el-checkbox>
+        <span v-else class="check-item">{{ item[prop.value] }}</span>
+        <i class="el-icon-arrow-right" />
+        <span class="item-checkbox cataract" @click="selectItem(item)" />
       </div>
       <template v-else>
-        <el-checkbox v-if="multi" class="check-item" v-model="item[prop.check]">{{item[prop.value]}}</el-checkbox>
-        <span v-else class="check-item">{{item[prop.value]}}</span>
+        <el-checkbox
+          v-if="multi"
+          v-model="item[prop.check]"
+          class="check-item"
+        >
+          {{ item[prop.value] }}
+        </el-checkbox>
+        <span v-else class="check-item">{{ item[prop.value] }}</span>
       </template>
-
     </div>
   </div>
 </template>
@@ -54,7 +78,7 @@ export default {
   },
   computed: {
     itemClasses() {
-      return item => {
+      return (item) => {
         const cls = ['check-item']
         if (item[this.prop.value] === this.value) {
           cls.push('active')
@@ -66,11 +90,11 @@ export default {
       }
     },
     all() {
-      const len = this.data.filter(ret => ret[this.prop.check]).length
+      const len = this.data.filter((ret) => ret[this.prop.check]).length
       return this.data.length === len
     },
     allIndeterminate() {
-      const len = this.data.filter(ret => ret[this.prop.check]).length
+      const len = this.data.filter((ret) => ret[this.prop.check]).length
       return len < this.data.length && len > 0
     }
   },
@@ -87,14 +111,18 @@ export default {
   },
   methods: {
     selectAll() {
-      if (this.disabled) { return }
+      if (this.disabled) {
+        return
+      }
       this.$emit('on-select', {
         check: !this.all,
         level: this.level
       })
     },
     selectItem(item) {
-      if (this.disabled) { return }
+      if (this.disabled) {
+        return
+      }
       this.$emit('on-select', {
         check: !item[this.prop.check],
         level: this.level,
@@ -105,13 +133,19 @@ export default {
       const hasChild = (meta) => {
         return meta[this.prop.children].reduce((sum, item) => {
           let foundChilds = []
-          if (item[this.prop.check]) { sum.push(item) }
-          if (item[this.prop.children]) { foundChilds = hasChild(item) }
+          if (item[this.prop.check]) {
+            sum.push(item)
+          }
+          if (item[this.prop.children]) {
+            foundChilds = hasChild(item)
+          }
           return sum.concat(foundChilds)
         }, [])
       }
       const some = hasChild(child).length > 0
-      const every = child[this.prop.children] && child[this.prop.children].every(ret => ret[this.prop.check])
+      const every =
+        child[this.prop.children] &&
+        child[this.prop.children].every((ret) => ret[this.prop.check])
       return some && !every
     }
   }
@@ -119,8 +153,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.ui-cascader__box{
-  .cataract{
+.ui-cascader__box {
+  .cataract {
     display: block;
     position: absolute;
     top: 0;
@@ -129,27 +163,27 @@ export default {
     cursor: pointer;
   }
 
-  .check-all{
+  .check-all {
     width: 100%;
     height: 36px;
     position: relative;
     z-index: 9;
-    &:hover{
-      .check-item{
+    &:hover {
+      .check-item {
         background-color: #f8f8f8;
       }
     }
-    .item-select{
+    .item-select {
       width: 100%;
       height: 100%;
 
-      &.disabled{
+      &.disabled {
         cursor: not-allowed;
       }
     }
   }
 
-  .check-item{
+  .check-item {
     margin: 0;
     padding: 0 12px;
     // display: block;
@@ -157,33 +191,30 @@ export default {
     height: 36px;
     line-height: 36px;
     font-size: 14px;
-    &.disabled{
+    &.disabled {
       cursor: not-allowed;
     }
-    &:hover{
+    &:hover {
       background-color: #f8f8f8;
     }
 
-    &.active{
+    &.active {
       color: #598fe6;
       background-color: #f8f8f8;
-      .el-icon-arrow-right{
+      .el-icon-arrow-right {
         color: #598fe6 !important;
       }
     }
 
-    .el-icon-arrow-right{
+    .el-icon-arrow-right {
       float: right;
       margin-top: 10px;
     }
 
-    .item-checkbox{
+    .item-checkbox {
       width: 36px;
       height: 36px;
-
     }
-
   }
 }
-
 </style>

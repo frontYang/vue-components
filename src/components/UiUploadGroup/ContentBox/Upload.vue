@@ -1,32 +1,51 @@
 <template>
-  <div class="upload" v-loading="loading">
+  <div v-loading="loading" class="upload">
     <div class="upload-box">
       <el-upload
+        ref="upload"
         :class="fileList.length > 0 ? 'upload hide' : 'upload'"
         action="http://192.168.3.24:2020/api/adp/toutiao/upload"
         :show-file-list="false"
-        :file-list="fileList"
+        :accept="accept"
         :multiple="true"
         :on-success="onSuccess"
         :on-error="onError"
-        :on-progress="onProgress"
-        :on-change="onChange"
         :before-upload="onBeforeUpload"
       >
-        <el-button class="btn-upload" size="small" icon="el-icon-upload">{{ label }}</el-button>
+        <el-button class="btn-upload" size="small" icon="el-icon-upload">
+          {{
+            label
+          }}
+        </el-button>
       </el-upload>
-
+      <!-- :file-list="fileList" -->
       <!-- 自定义图片预览 -->
-      <div :class="fileList.length <= 0 ? 'upload upload-preview hide' : 'upload upload-preview'">
-        <div class="preview-item" v-for="(file, index) in fileList" :key="index">
-          <img :src="file.url" />
-          <div class="operation">
-            <i class="el-icon-delete" @click="onRemove"></i>
-          </div>
+      <div
+        :class="
+          fileList.length <= 0
+            ? 'upload upload-preview hide'
+            : 'upload upload-preview'
+        "
+      >
+        <div
+          v-for="(file, index) in fileList"
+          :key="index"
+          class="preview-item"
+        >
+          <template v-if="index === 0">
+            <img :src="file.url">
+            <div class="operation">
+              <i class="el-icon-delete" @click="onRemove" />
+            </div>
+          </template>
         </div>
       </div>
       <div class="upload-sub">
-        <el-button class="btn-source" size="small" @click="select">{{ btnLabel }}</el-button>
+        <el-button class="btn-source" size="small" @click="select">
+          {{
+            btnLabel
+          }}
+        </el-button>
       </div>
     </div>
     <div class="upload-tip">{{ tip }}</div>
@@ -47,46 +66,82 @@ export default {
     tip: {
       type: String,
       default: ''
+    },
+    accept: {
+      type: String
     }
   },
   data() {
     return {
       loading: false,
-      fileList: []
+      fileList: [],
+      temp: []
     }
   },
-  components: {},
+  created() {
+    this.fileList = this.getFileList()
+    this.fileList.forEach((item, index) => {
+      if (!item.response.data.view_url || item.response.data.view_url === '') {
+        this.fileList.splice(index, 1)
+      }
+    })
+  },
   methods: {
     select() {},
-    onChange(file, fileList) {
-      console.log('onChange', file, fileList)
-    },
     onBeforeUpload(file) {
       this.loading = true
-      console.log('onBeforeUpload', file)
     },
     onSuccess(response, file, fileList) {
       console.log('onSuccess', response, file, fileList)
-      this.fileList.push(response.data)
+      this.fileList.push(response.data.url)
       this.loading = false
+      // this.temp = []
+      // this.setTemp(this.$refs.upload.uploadFiles)
       this.fileList.length > 1 && this.$emit('on-multi-upload', this.fileList)
     },
     onError(err, file, fileList) {
       this.loading = false
       console.log('onError', err, file, fileList)
     },
-    onProgress(event, file, fileList) {
-      console.log('onProgress', event, file, fileList)
-    },
     onRemove() {
       this.fileList = []
+    },
+    /* 获取文件列表 */
+    getFileList() {
+      const value = this.value
+      const arr = [
+        {
+          response: {
+            data: Object.assign({}, value)
+          }
+        }
+      ]
+      return arr
     }
+
+    /* 初始化temp */
+    /*  setTemp(data) {
+      data.forEach((e) => {
+        // 把成功的状态的对象过滤过来，不处理状态为uploading的
+        if (e.status === 'success') {
+          if (e.response) {
+            // 处理后台返回的值
+            this.temp.push({
+              response: e.response,
+              status: 'success'
+            })
+          } else if (e.fkStaMemberQyfjId_) {
+            // 数组里已经处理的对象不做处理
+          }
+        }
+      })
+    } */
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/_var';
+@import "@/assets/styles/_var";
 .upload {
   display: inline-block;
   position: relative;

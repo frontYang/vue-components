@@ -4,14 +4,29 @@
     <tabs-box v-model="tabValue" :tabs="tabs" :content-len="contentLen" />
 
     <!-- 首层tab内容 -->
-    <div :class="contentCls(key)" v-for="(item, key) in content" :key="key">
+    <div v-for="(item, key) in content" :key="key" :class="contentCls(key)">
       <div class="content-item">
         <!-- 多个创意 -->
         <div class="upload-group">
-          <div class="empty-box" v-if="contentValue[key].length === 0" @click="addEvent(key)">
-            <el-button class="btn-plus" type="" icon="el-icon-plus" size="">添加创意</el-button>
+          <div
+            v-if="contentValue[key].length === 0"
+            class="empty-box"
+            @click="addEvent(key)"
+          >
+            <el-button
+              class="btn-plus"
+              type=""
+              icon="el-icon-plus"
+              size=""
+            >
+              添加创意
+            </el-button>
           </div>
-          <content-box v-else :tab-value="tabValue" v-model="contentValue[key]" />
+          <content-box
+            v-else
+            v-model="contentValue[key]"
+            :tab-value="tabValue"
+          />
         </div>
       </div>
     </div>
@@ -74,7 +89,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/_common';
+@import "@/assets/styles/_common";
 .ui-upload-group {
   border: 1px solid #ddd;
   border-radius: 5px;

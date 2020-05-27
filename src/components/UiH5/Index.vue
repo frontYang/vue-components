@@ -1,9 +1,14 @@
 <template>
   <div class="ui-h5 f-flex f-flex-strength scrollbar">
     <div class="box box-elements f-flex-left">
-      <el-tabs v-model="activeName" type="border-card" tab-position="left" @tab-click="tabClick">
+      <el-tabs
+        v-model="activeName"
+        type="border-card"
+        tab-position="left"
+        @tab-click="tabClick"
+      >
         <el-tab-pane label="元素" name="elements"><elements /></el-tab-pane>
-        <el-tab-pane label="设置" name="page"></el-tab-pane>
+        <el-tab-pane label="设置" name="page" />
       </el-tabs>
     </div>
     <div class="box box-panel">
@@ -38,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/_common.scss';
+@import "@/assets/styles/_common.scss";
 .ui-h5 {
   background: #f1f1f1;
   width: 100%;

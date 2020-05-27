@@ -2,8 +2,13 @@
   <!-- 组件元素 -->
   <div class="ui-h5__elements">
     <div class="elements-box f-flex f-flex-strength">
-      <div class="elements-item" v-for="(item, index) in data" :key="index" @click="nodeClick(item.type)">
-        <i :class="`el-icon-${item.icon}`"></i>
+      <div
+        v-for="(item, index) in data"
+        :key="index"
+        class="elements-item"
+        @click="nodeClick(item.type)"
+      >
+        <i :class="`el-icon-${item.icon}`" />
         <span class="label">{{ item.label }}</span>
       </div>
     </div>
@@ -45,7 +50,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/_common.scss';
+@import "@/assets/styles/_common.scss";
 
 .ui-h5__elements {
   min-height: 667px;

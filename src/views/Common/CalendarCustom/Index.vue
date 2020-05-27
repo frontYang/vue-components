@@ -2,13 +2,18 @@
   <div class="page">
     <ui-calendar-custom v-model="selected" />
     <p>选中数据：</p>
-    <pre style="border:1px solid #ddd; max-height: 200px;overflow: auto;">{{ selected }}</pre>
+    <pre style="border: 1px solid #ddd; max-height: 200px; overflow: auto;">{{
+      selected
+    }}</pre>
   </div>
 </template>
 
 <script>
 import UiCalendarCustom from '@/components/UiCalendarCustom/Index'
 export default {
+  components: {
+    'ui-calendar-custom': UiCalendarCustom
+  },
   data() {
     return {
       selected: [
@@ -22,9 +27,6 @@ export default {
         '2020-04-26'
       ]
     }
-  },
-  components: {
-    'ui-calendar-custom': UiCalendarCustom
   },
   mounted() {}
 }

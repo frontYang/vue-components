@@ -1,7 +1,0 @@
-.eslintrc.js
-.eslintignore
-*.config.js
-*.json
-.yarnrc
-node_modules
-tests

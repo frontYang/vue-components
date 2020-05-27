@@ -2,15 +2,19 @@
   <div class="page page-index">
     <h2>todoList</h2>
     <p v-for="(item, index) in todoList" :key="index">
-      <el-checkbox :disabled="true" :value="item.checked"></el-checkbox>
-      <el-link type="primary" :disabled="!item.checked" :href="item.url">{{ item.label }}</el-link>
+      <el-checkbox :disabled="true" :value="item.checked" />
+      <el-link type="primary" :disabled="!item.checked" :href="item.url">
+        {{
+          item.label
+        }}
+      </el-link>
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index',
+  name: 'Index',
   data() {
     return {
       todoList: [

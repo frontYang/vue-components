@@ -1,31 +1,21 @@
 <template>
   <div class="page page-tpl">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
+  components: {},
   data() {
-    return {
-
-    }
+    return {}
   },
-  components: {
+  computed: {},
 
-  },
-  computed: {
-  },
+  mounted() {},
 
-  methods: {
-
-  },
-
-  mounted() {
-
-  }
+  methods: {}
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

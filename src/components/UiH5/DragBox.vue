@@ -7,30 +7,37 @@
       @mousedown.stop="roundMouseEvent($event, index + 1)"
       @mousemove.stop="roundMousemove($event, index + 1)"
       @mouseup.stop="roundMousemove($event, index + 1)"
-    ></div>
-    <slot></slot>
+    />
+    <slot />
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
-  name: 'drag-box',
+  name: 'DragBox',
   data() {
     return {
       layout: {},
-      point: ['top_left', 'top_top', 'top_right', 'bottom_left', 'bottom_bottom', 'bottom_right']
+      point: [
+        'top_left',
+        'top_top',
+        'top_right',
+        'bottom_left',
+        'bottom_bottom',
+        'bottom_right'
+      ]
     }
   },
   computed: {
     ...mapState(['h5']),
     style() {
       return {
-        'width': this.layout.width + 'px',
-        'height': this.layout.height + 'px',
-        'left': this.layout.x + 'px',
-        'top': this.layout.y + 'px',
-        'color': this.layout.color + 'px',
+        width: this.layout.width + 'px',
+        height: this.layout.height + 'px',
+        left: this.layout.x + 'px',
+        top: this.layout.y + 'px',
+        color: this.layout.color + 'px',
         'font-size': this.layout.fontSize + 'px'
       }
     }
@@ -57,12 +64,22 @@ export default {
     // 设置样式
     setStyle() {
       this.$nextTick(() => {
-        const elements = document.querySelector(`.ui-h5__dragbox-${this.h5.current} .base-text`)
+        const elements = document.querySelector(
+          `.ui-h5__dragbox-${this.h5.current} .base-text`
+        )
         const width = elements.offsetWidth
         const height = elements.offsetHeight
         console.log(this.layout.width, width)
-        this.$set(this.layout, 'width', this.layout.width === 0 ? width : this.layout.width)
-        this.$set(this.layout, 'height', this.layout.height === 0 ? height : this.layout.height)
+        this.$set(
+          this.layout,
+          'width',
+          this.layout.width === 0 ? width : this.layout.width
+        )
+        this.$set(
+          this.layout,
+          'height',
+          this.layout.height === 0 ? height : this.layout.height
+        )
       })
     },
     roundMousedown(e, index) {

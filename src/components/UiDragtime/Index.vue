@@ -1,52 +1,75 @@
 <template>
   <div class="ui-weektime">
-    <div class="weektime-schedue"></div>
-    <div :class="{'weektime-schedue': true, 'weektime-schedue-notransi': mode}" :style="styleValue"></div>
+    <div class="weektime-schedue" />
+    <div
+      :class="{ 'weektime-schedue': true, 'weektime-schedue-notransi': mode }"
+      :style="styleValue"
+    />
 
-    <table class="ui-weektime-table" :class="{'box-min-table': colspan < 2}">
+    <table class="ui-weektime-table" :class="{ 'box-min-table': colspan < 2 }">
       <thead class="ui-weektime-head">
         <tr>
-          <th rowspan="8" class="week-td">{{hideSub ? '时间' : '星期/时间'}}</th>
+          <th rowspan="8" class="week-td">
+            {{ hideSub ? "时间" : "星期/时间" }}
+          </th>
           <th :colspan="12 * colspan">00:00 - 12:00</th>
           <th :colspan="12 * colspan">12:00 - 24:00</th>
           <th>操作</th>
         </tr>
         <tr>
-          <td v-for="t in theadArr" :key="t" :colspan="colspan">{{t}}</td>
-          <td><el-checkbox v-if="!hideSub" v-model="checkAll" @change="selectAll" :indeterminate="indeterminate">全选</el-checkbox></td>
+          <td v-for="t in theadArr" :key="t" :colspan="colspan">{{ t }}</td>
+          <td>
+            <el-checkbox
+              v-if="!hideSub"
+              v-model="checkAll"
+              :indeterminate="indeterminate"
+              @change="selectAll"
+            >
+              全选
+            </el-checkbox>
+          </td>
         </tr>
       </thead>
       <tbody class="ui-weektime-body">
         <tr v-for="t in data" :key="t.row">
-          <td>{{hideSub ? '' : t.value}}</td>
+          <td>{{ hideSub ? "" : t.value }}</td>
           <td
             v-for="n in t.child"
             :key="`${n.row}-${n.col}`"
             :data-week="n.row"
             :data-time="n.col"
+            :class="selectClasses(n)"
+            class="weektime-atom-item"
             @mouseenter="cellEnter(n)"
             @mousedown="cellDown(n)"
             @mouseup="cellUp(n)"
-            :class="selectClasses(n)"
-            class="weektime-atom-item">
-          </td>
+          />
           <td>
             <div class="checkbox">
-              <el-checkbox @change="selectAllDay(t.row)"  v-model="rowFlg[t.row]">全天</el-checkbox>
+              <el-checkbox
+                v-model="rowFlg[t.row]"
+                @change="selectAllDay(t.row)"
+              >
+                全天
+              </el-checkbox>
             </div>
           </td>
         </tr>
         <tr>
           <td colspan="50" class="ui-weektime-preview">
             <div class="g-clearfix ui-weektime-con">
-              <span class="g-pull-left">{{selectState ? '已选择时间段' : '可拖动鼠标选择时间段'}}</span>
+              <span class="g-pull-left">{{
+                selectState ? "已选择时间段" : "可拖动鼠标选择时间段"
+              }}</span>
               <a class="g-pull-right" @click.prevent="clearSelect">清空选择</a>
             </div>
             <div v-if="selectState" class="ui-weektime-time">
               <div v-for="t in selectValue" :key="t.id">
                 <p v-if="t.value">
-                  <span class="g-tip-text">{{hideSub ? ''  : t.week + '：'}}</span>
-                  <span>{{t.value}}</span>
+                  <span class="g-tip-text">{{
+                    hideSub ? "" : t.week + "："
+                  }}</span>
+                  <span>{{ t.value }}</span>
                 </p>
               </div>
             </div>
@@ -57,13 +80,12 @@
   </div>
 </template>
 <script>
-
-const createArr = len => {
+const createArr = (len) => {
   return Array.from(Array(len)).map((ret, id) => id)
 }
 
 export default {
-  name: 'dragtime',
+  name: 'Dragtime',
   props: {
     value: {
       type: Array
@@ -112,10 +134,10 @@ export default {
       return this.value
     },
     selectState() {
-      return this.value.some(ret => ret.value)
+      return this.value.some((ret) => ret.value)
     },
     selectClasses() {
-      return n => n.check ? 'ui-selected' : ''
+      return (n) => (n.check ? 'ui-selected' : '')
     }
   },
   created() {
@@ -124,7 +146,9 @@ export default {
   },
   methods: {
     cellEnter(item) {
-      const ele = document.querySelector(`td[data-week='${item.row}'][data-time='${item.col}']`)
+      const ele = document.querySelector(
+        `td[data-week='${item.row}'][data-time='${item.col}']`
+      )
       if (ele && !this.mode) {
         this.left = ele.offsetLeft
         this.top = ele.offsetTop
@@ -137,10 +161,13 @@ export default {
         } else if (item.col >= this.col && item.row >= this.row) {
           this.width = (item.col - this.col + 1) * ele.offsetWidth
           this.height = (item.row - this.row + 1) * ele.offsetHeight
-          if (item.col > this.col && item.row === this.row) { this.top = ele.offsetTop }
-          if (item.col === this.col && item.row > this.row) { this.left = ele.offsetLeft }
-        } else
-        if (item.col > this.col && item.row < this.row) {
+          if (item.col > this.col && item.row === this.row) {
+            this.top = ele.offsetTop
+          }
+          if (item.col === this.col && item.row > this.row) {
+            this.left = ele.offsetLeft
+          }
+        } else if (item.col > this.col && item.row < this.row) {
           this.width = (item.col - this.col + 1) * ele.offsetWidth
           this.height = (this.row - item.row + 1) * ele.offsetHeight
           this.top = ele.offsetTop
@@ -153,7 +180,9 @@ export default {
       this.curItem = item
     },
     cellDown(item) {
-      const ele = document.querySelector(`td[data-week='${item.row}'][data-time='${item.col}']`)
+      const ele = document.querySelector(
+        `td[data-week='${item.row}'][data-time='${item.col}']`
+      )
       this.check = Boolean(item.check)
       this.mode = 1
       if (ele) {
@@ -166,13 +195,29 @@ export default {
     },
     cellUp(item) {
       if (item.col <= this.col && item.row <= this.row) {
-        this.selectWeek([item.row, this.row], [item.col, this.col], !this.check)
+        this.selectWeek(
+          [item.row, this.row],
+          [item.col, this.col],
+          !this.check
+        )
       } else if (item.col >= this.col && item.row >= this.row) {
-        this.selectWeek([this.row, item.row], [this.col, item.col], !this.check)
+        this.selectWeek(
+          [this.row, item.row],
+          [this.col, item.col],
+          !this.check
+        )
       } else if (item.col > this.col && item.row < this.row) {
-        this.selectWeek([item.row, this.row], [this.col, item.col], !this.check)
+        this.selectWeek(
+          [item.row, this.row],
+          [this.col, item.col],
+          !this.check
+        )
       } else if (item.col < this.col && item.row > this.row) {
-        this.selectWeek([this.row, item.row], [item.col, this.col], !this.check)
+        this.selectWeek(
+          [this.row, item.row],
+          [item.col, this.col],
+          !this.check
+        )
       }
 
       this.width = 0
@@ -182,9 +227,14 @@ export default {
     selectWeek(row, col, check) {
       const [minRow, maxRow] = row
       const [minCol, maxCol] = col
-      this.data.forEach(item => {
-        item.child.forEach(t => {
-          if (t.row >= minRow && t.row <= maxRow && t.col >= minCol && t.col <= maxCol) {
+      this.data.forEach((item) => {
+        item.child.forEach((t) => {
+          if (
+            t.row >= minRow &&
+            t.row <= maxRow &&
+            t.col >= minCol &&
+            t.col <= maxCol
+          ) {
             this.$set(t, 'check', check)
           }
         })
@@ -210,7 +260,9 @@ export default {
     },
 
     setRowFlg(flg) {
-      for (let i = 0; i < 7; i++) { this.rowFlg[i] = flg }
+      for (let i = 0; i < 7; i++) {
+        this.rowFlg[i] = flg
+      }
     },
 
     clearSelect() {
@@ -222,7 +274,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$primary:  #409EFF;
+$primary: #409eff;
 .ui-weektime {
   min-width: 640px;
   position: relative;
@@ -233,11 +285,12 @@ $primary:  #409EFF;
   position: absolute;
   width: 0;
   height: 0;
-  opacity: .5;
+  opacity: 0.5;
   pointer-events: none;
 }
 .weektime-schedue-notransi {
-  transition: width .12s ease, height .12s ease, top .12s ease, left .12s ease;
+  transition: width 0.12s ease, height 0.12s ease, top 0.12s ease,
+    left 0.12s ease;
 }
 .ui-weektime-table {
   border-collapse: collapse;
@@ -248,13 +301,15 @@ $primary:  #409EFF;
   tr {
     height: 30px;
   }
-  tr, td, th {
+  tr,
+  td,
+  th {
     user-select: none;
     border: 1px solid #dee4f5;
     text-align: center;
     min-width: 12px;
     line-height: 1.8em;
-    transition: background .2s ease;
+    transition: background 0.2s ease;
   }
   .ui-weektime-head {
     font-size: 12px;
@@ -274,7 +329,7 @@ $primary:  #409EFF;
       }
     }
 
-    .checkbox{
+    .checkbox {
       padding: 0 10px;
     }
   }
@@ -299,12 +354,15 @@ $primary:  #409EFF;
   }
 }
 .box-min-table {
-  tr, td, th {
+  tr,
+  td,
+  th {
     min-width: 24px;
   }
 }
 .g-clearfix {
-  &:after, &:before {
+  &:after,
+  &:before {
     clear: both;
     content: " ";
     display: table;

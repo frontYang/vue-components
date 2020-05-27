@@ -1,7 +1,7 @@
 <template>
   <div class="ui-cascader scrollbar f-flex">
     <div class="cascader-box f-flex">
-      <div class="cascader-item" v-for="(item, index) in resource" :key="index">
+      <div v-for="(item, index) in resource" :key="index" class="cascader-item">
         <select-item :title="item.title">
           <select-box
             v-model="item.current"
@@ -16,19 +16,22 @@
         </select-item>
       </div>
     </div>
-    <div class="cascader-result" v-if="!hideResult">
+    <div v-if="!hideResult" class="cascader-result">
       <select-item
         v-if="selectedData.length"
         title="已选"
         clear
-        @on-clear="clearTag">
+        @on-clear="clearTag"
+      >
         <div v-for="item in selectedData" :key="item[prop.id]" class="pop-tip">
           <el-tag
             :name="item[prop.value]"
             closable
             class="tag-item"
             @close="handleClose(item[prop.id])"
-          >{{item[prop.value]}}</el-tag>
+          >
+            {{ item[prop.value] }}
+          </el-tag>
         </div>
       </select-item>
     </div>
@@ -39,7 +42,11 @@
 import SelectItem from './SelectItem'
 import SelectBox from './SelectBox'
 export default {
-  name: 'cascader',
+  name: 'Cascader',
+  components: {
+    'select-item': SelectItem,
+    'select-box': SelectBox
+  },
   props: {
     // 已选
     value: {
@@ -92,10 +99,6 @@ export default {
       newData: []
     }
   },
-  components: {
-    'select-item': SelectItem,
-    'select-box': SelectBox
-  },
   computed: {
     selectedData() {
       return this.$utils.findCheck({
@@ -107,7 +110,7 @@ export default {
   },
   watch: {
     selectedData() {
-      const selectedIdArr = this.selectedData.map(v => v.id)
+      const selectedIdArr = this.selectedData.map((v) => v.id)
       this.$emit('input', selectedIdArr)
     },
     newData(nVal) {
@@ -133,8 +136,12 @@ export default {
       this.resource = []
       this.resource.push({
         data: this.newData,
-        current: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.value] : '',
-        id: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.id] : '',
+        current: this.selectedData[this.selectedData.length - 1]
+          ? this.selectedData[this.selectedData.length - 1][this.prop.value]
+          : '',
+        id: this.selectedData[this.selectedData.length - 1]
+          ? this.selectedData[this.selectedData.length - 1][this.prop.id]
+          : '',
         level: 1,
         title: this.title[0]
       })
@@ -144,8 +151,10 @@ export default {
       let data
       // 无限递归
       const setAllChecked = (data, check) => {
-        data.forEach(ret => {
-          if (ret[this.prop.children] && ret[this.prop.children].length) { setAllChecked(ret[this.prop.children], check) }
+        data.forEach((ret) => {
+          if (ret[this.prop.children] && ret[this.prop.children].length) {
+            setAllChecked(ret[this.prop.children], check)
+          }
           this.$set(ret, this.prop.check, check)
         })
       }
@@ -175,7 +184,11 @@ export default {
     handleClose(id) {
       const data = this.$utils.getIdOfData(this.newData, this.prop, id)
       if (data[this.prop.children] && data[this.prop.children].length) {
-        this.selectFn({ list: this.newData, check: false, id: data[this.prop.id] })
+        this.selectFn({
+          list: this.newData,
+          check: false,
+          id: data[this.prop.id]
+        })
       } else {
         this.$set(data, this.prop.check, false)
       }
@@ -187,11 +200,11 @@ export default {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(() => {
-          this.$utils.clearTagOfData(this.newData, this.prop, this)
-        }).catch(() => {
-
         })
+          .then(() => {
+            this.$utils.clearTagOfData(this.newData, this.prop, this)
+          })
+          .catch(() => {})
       } else {
         this.$utils.clearTagOfData(this.newData, this.prop, this)
       }
@@ -205,8 +218,12 @@ export default {
       }
       this.resource.push({
         data: item[this.prop.children],
-        current: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.value] : '',
-        id: this.selectedData[this.selectedData.length - 1] ? this.selectedData[this.selectedData.length - 1][this.prop.id] : '',
+        current: this.selectedData[this.selectedData.length - 1]
+          ? this.selectedData[this.selectedData.length - 1][this.prop.value]
+          : '',
+        id: this.selectedData[this.selectedData.length - 1]
+          ? this.selectedData[this.selectedData.length - 1][this.prop.id]
+          : '',
         level: level + 1,
         title: this.title[level] || item[this.prop.value]
       })
@@ -218,21 +235,21 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/_common.scss';
+@import "@/assets/styles/_common.scss";
 
-.ui-cascader{
-  .cascader-result{
+.ui-cascader {
+  .cascader-result {
     flex: 1;
   }
-  .cascader-box{
+  .cascader-box {
     flex: 1;
     min-width: 65%;
-    .cascader-item{
+    .cascader-item {
       flex: 1;
     }
   }
-  .cascader-result{
-    .el-tag{
+  .cascader-result {
+    .el-tag {
       width: 94%;
       margin: 8px 14px 0;
       display: block;
@@ -240,7 +257,7 @@ export default {
       height: 28px;
       position: relative;
 
-      .el-icon-close{
+      .el-icon-close {
         position: absolute;
         top: 50%;
         right: 5px;
@@ -250,5 +267,4 @@ export default {
     }
   }
 }
-
 </style>

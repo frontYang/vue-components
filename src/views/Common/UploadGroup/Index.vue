@@ -7,11 +7,11 @@
 <script>
 import UiUploadGroup from '@/components/UiUploadGroup/Index'
 export default {
-  data() {
-    return {}
-  },
   components: {
     'ui-upload-group': UiUploadGroup
+  },
+  data() {
+    return {}
   },
   mounted() {}
 }
