@@ -6,8 +6,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint-fix": "eslint --fix --ext .js --ext .vue src/",
+    "stylelint-fix": "stylelint src/**/*.{css,scss} --syntax=scss --fix",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "build:serve": "node server/index.js"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -15,6 +17,9 @@
     "ele-calendar": "^1.2.0",
     "element-ui": "^2.12.0",
     "file-saver": "^2.0.2",
+    "global": "^4.4.0",
+    "html2canvas": "^1.0.0-rc.5",
+    "jspdf": "^1.5.3",
     "pdfvuer": "^1.4.0",
     "quill-image-extend-module": "^1.1.2",
     "quill-image-resize-module": "^3.0.0",
@@ -47,6 +52,12 @@
     "mockjs": "^1.0.1-beta3",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
+    "stylelint": "^13.6.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
+    "stylelint-order": "^4.1.0",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^3.6.0"
   },
@@ -59,6 +70,9 @@
     "*.{js,vue}": [
       "eslint --fix",
       "git add"
+    ],
+    "*.{css,scss,vue}": [
+      "stylelint src/**/*.{css,scss} --syntax=scss --fix"
     ]
   }
 }

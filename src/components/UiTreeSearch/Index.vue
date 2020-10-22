@@ -121,10 +121,13 @@ export default {
 
 <style scope lang="scss">
 @import "@/assets/styles/_common.scss";
+
 .ui-input-search {
+
   &.el-form {
     position: relative;
   }
+
   .list-search {
     width: 100%;
     box-sizing: border-box;

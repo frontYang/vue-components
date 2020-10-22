@@ -48,16 +48,19 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/_common";
+
 .tabs-box {
   height: 46px;
   line-height: 46px;
   border-bottom: 1px solid #ddd;
   overflow: hidden;
+
   .tabs-box__item {
     text-align: center;
     padding: 0 20px;
     font-size: 14px;
     cursor: pointer;
+
     &:hover,
     &.current {
       color: $primary;

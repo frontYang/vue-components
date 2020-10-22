@@ -97,21 +97,24 @@ export default {
   left: 50%;
   transform: translate(-50%, -60%);
   box-sizing: border-box;
-  box-shadow: 0px 0px 2px 2px #eee;
+  box-shadow: 0 0 2px 2px #eee;
   padding: 30px 0 60px;
   width: 50%;
   min-width: 320px;
   max-width: 500px;
   border-radius: 5px;
+
   .box-th {
     font-weight: bold;
     font-size: 24px;
     padding-bottom: 26px;
   }
+
   .el-form {
     width: 85%;
     margin: 0 auto;
   }
+
   .el-button {
     width: 100%;
   }

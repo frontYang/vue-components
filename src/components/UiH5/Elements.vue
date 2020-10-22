@@ -56,6 +56,7 @@ export default {
   min-height: 667px;
   overflow-y: auto;
   padding: 0 0;
+
   .elements-box {
     flex-wrap: wrap;
 
@@ -70,6 +71,7 @@ export default {
       color: $primary;
       border: 1px dashed #ddd;
       cursor: pointer;
+
       i {
         font-size: 28px;
       }

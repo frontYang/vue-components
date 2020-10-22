@@ -80,6 +80,7 @@ export default {
 
 .ui-image-scroll {
   display: flex;
+
   .image-item {
     position: relative;
     height: 240px;
@@ -88,6 +89,7 @@ export default {
     box-sizing: border-box;
     cursor: pointer;
   }
+
   .el-image {
     height: 240px;
     width: 320px;
@@ -96,10 +98,12 @@ export default {
     img {
       // transition: all .6s;
     }
+
     .el-image__inner {
       height: auto;
     }
   }
+
   .image-slot {
     position: absolute;
     width: 100%;
@@ -107,6 +111,7 @@ export default {
     top: 0;
     left: 0;
   }
+
   .el-icon-loading {
     font-size: 40px;
     color: #333;

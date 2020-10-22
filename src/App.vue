@@ -6,8 +6,6 @@
   </div>
 </template>
 
-<style lang="scss"></style>
-
 <script>
 // @ is an alias to /src
 

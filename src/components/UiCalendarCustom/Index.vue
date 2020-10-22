@@ -278,18 +278,22 @@ export default {
 
 <style lang="scss">
 .ui-calendar-custom {
+
   .date-cell {
     text-align: center;
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
+
     &.is-selected {
       background-color: #f2f8fe;
     }
+
     span {
       display: block;
     }
   }
+
   .el-calendar-table tr:first-child td {
     padding: 0;
   }

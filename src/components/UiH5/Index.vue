@@ -44,6 +44,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/styles/_common.scss";
+
 .ui-h5 {
   background: #f1f1f1;
   width: 100%;
@@ -56,28 +57,36 @@ export default {
   bottom: 0;
   border-radius: 5px;
   box-sizing: border-box;
+
   .box {
     position: relative;
+
     &.box-elements,
     &.box-config {
       background: #fff;
       flex-grow: 0;
     }
+
     &.box-elements {
       width: 258px;
+
       .el-tabs {
         height: 100%;
+
         .el-tabs__header {
           margin-right: 0;
         }
+
         & > .el-tabs__content {
           padding: 0;
         }
       }
     }
+
     &.box-config {
       width: 340px;
     }
+
     &.box-panel {
       min-width: 375px;
       flex-grow: 3;

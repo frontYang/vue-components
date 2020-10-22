@@ -112,7 +112,7 @@ export default {
   cursor: move;
 
   .inline_btn {
-    margin: 0px;
+    margin: 0;
   }
 
   .point {
@@ -123,33 +123,39 @@ export default {
     height: 6px;
     border: 2px solid #1890ff;
   }
+
   .top_left {
     left: -3px;
     top: -3px;
     cursor: nw-resize;
   }
+
   .top_top {
     left: 50%;
     top: -3px;
     margin-left: -3px;
     cursor: n-resize;
   }
+
   .top_right {
     right: -3px;
     top: -3px;
     cursor: ne-resize;
   }
+
   .bottom_left {
     left: -3px;
     bottom: -3px;
     cursor: sw-resize;
   }
+
   .bottom_bottom {
     left: 50%;
     margin-left: -3px;
     bottom: -3px;
     cursor: s-resize;
   }
+
   .bottom_right {
     right: -3px;
     bottom: -3px;

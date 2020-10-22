@@ -90,9 +90,11 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/_common";
+
 .ui-upload-group {
   border: 1px solid #ddd;
   border-radius: 5px;
+
   .hide {
     display: none !important;
   }

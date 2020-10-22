@@ -142,20 +142,25 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/_var";
+
 .upload {
   display: inline-block;
   position: relative;
+
   .upload-tip {
     color: $gray;
     font-size: 12px;
     line-height: 20px;
   }
+
   .upload-box {
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
+
     .upload {
       width: 100%;
+
       ::v-deep .el-upload {
         width: 100%;
       }
@@ -164,6 +169,7 @@ export default {
         display: none !important;
       }
     }
+
     .el-button {
       background: #f8f8f8;
     }
@@ -199,6 +205,7 @@ export default {
         max-width: 100%;
         max-height: 100%;
       }
+
       .operation {
         position: absolute;
         bottom: 0;

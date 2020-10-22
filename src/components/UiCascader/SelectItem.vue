@@ -53,6 +53,7 @@ export default {
       cursor: pointer;
     }
   }
+
   .selecter-content {
     height: 246px;
     width: 100%;

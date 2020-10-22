@@ -128,18 +128,23 @@ export default {
   .el-input-number {
     width: 100px;
   }
+
   .el-input {
     width: 100%;
   }
+
   .el-collapse-item__content {
     padding-bottom: 0;
   }
+
   .el-form-item__label {
     min-width: 40px;
   }
+
   .el-upload {
     display: inline-block;
   }
+
   .btn-delete {
     display: block;
     margin: 20px auto;

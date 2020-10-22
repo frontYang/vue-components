@@ -172,28 +172,34 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/styles/_common";
+
 .content-box {
+
   .box-tabs {
     display: flex;
     height: 40px;
     line-height: 40px;
     padding: 0 5px;
     border-bottom: 1px solid #ddd;
+
     .box-tabs__item {
       padding: 0 15px;
       font-size: 14px;
       cursor: pointer;
+
       &:hover,
       &.current {
         color: $primary;
       }
     }
+
     .btn-plus {
       margin: 5px 0;
     }
   }
 
   .box-content__item {
+
     &.hide {
       display: none !important;
     }
@@ -202,6 +208,7 @@ export default {
       padding: 10px;
     }
   }
+
   .upload {
     width: 250px;
     display: inline-block;

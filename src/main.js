@@ -21,6 +21,10 @@ import 'element-ui/lib/theme-chalk/index.css' // 默认主题
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
+import htmlToPdf from '@/views/Common/PDF/htmlToPdf.js'
+// 使用Vue.use()方法就会调用工具方法中的install方法
+Vue.use(htmlToPdf)
+
 // 挂载全局
 Vue.prototype.$https = https
 Vue.prototype.$utils = utils

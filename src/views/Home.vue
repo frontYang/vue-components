@@ -15,6 +15,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/styles/_var.scss";
+
 .el-header {
   background: $bgHeaderNav;
 }

@@ -238,17 +238,10 @@ export default {
 @import "@/assets/styles/_common.scss";
 
 .ui-cascader {
+
   .cascader-result {
     flex: 1;
-  }
-  .cascader-box {
-    flex: 1;
-    min-width: 65%;
-    .cascader-item {
-      flex: 1;
-    }
-  }
-  .cascader-result {
+
     .el-tag {
       width: 94%;
       margin: 8px 14px 0;
@@ -264,6 +257,15 @@ export default {
         -webkit-transform: translate(0, -50%);
         transform: translate(0, -50%);
       }
+    }
+  }
+
+  .cascader-box {
+    flex: 1;
+    min-width: 65%;
+
+    .cascader-item {
+      flex: 1;
     }
   }
 }

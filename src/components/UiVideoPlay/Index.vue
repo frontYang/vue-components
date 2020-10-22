@@ -87,6 +87,7 @@ export default {
 <style lang="scss">
 .ui-video-play {
   display: flex;
+
   .video-item {
     position: relative;
     height: 240px;
@@ -94,10 +95,12 @@ export default {
     margin: 10px;
     box-sizing: border-box;
   }
+
   .el-image {
     height: 240px;
     width: 320px;
   }
+
   .video {
     position: absolute;
     width: 100%;
@@ -105,16 +108,19 @@ export default {
     top: 0;
     left: 0;
   }
+
   .image-slot {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
+
     .el-icon-loading {
       display: block !important;
     }
   }
+
   .el-icon-loading {
     display: none;
     font-size: 40px;
@@ -124,6 +130,7 @@ export default {
     left: 50%;
     margin: -20px 0 0 -20px;
   }
+
   .el-icon-video-play {
     font-size: 40px;
     position: absolute;

@@ -275,11 +275,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 $primary: #409eff;
+
 .ui-weektime {
   min-width: 640px;
   position: relative;
   display: inline-block;
 }
+
 .weektime-schedue {
   background: $primary;
   position: absolute;
@@ -288,19 +290,27 @@ $primary: #409eff;
   opacity: 0.5;
   pointer-events: none;
 }
+
 .weektime-schedue-notransi {
-  transition: width 0.12s ease, height 0.12s ease, top 0.12s ease,
+  transition:
+    width 0.12s ease,
+    height 0.12s ease,
+    top 0.12s ease,
     left 0.12s ease;
 }
+
 .ui-weektime-table {
   border-collapse: collapse;
+
   th {
     vertical-align: inherit;
     font-weight: bold;
   }
+
   tr {
     height: 30px;
   }
+
   tr,
   td,
   th {
@@ -311,19 +321,25 @@ $primary: #409eff;
     line-height: 1.8em;
     transition: background 0.2s ease;
   }
+
   .ui-weektime-head {
     font-size: 12px;
+
     .week-td {
       width: 70px;
     }
   }
+
   .ui-weektime-body {
     font-size: 12px;
+
     td {
+
       &.weektime-atom-item {
         user-select: unset;
         background-color: #f5f5f5;
       }
+
       &.ui-selected {
         background-color: $primary;
       }
@@ -333,17 +349,21 @@ $primary: #409eff;
       padding: 0 10px;
     }
   }
+
   .ui-weektime-preview {
     line-height: 2.4em;
     padding: 0 10px;
     font-size: 14px;
+
     .ui-weektime-con {
       line-height: 46px;
       user-select: none;
     }
+
     .ui-weektime-time {
       text-align: left;
       line-height: 2.4em;
+
       p {
         max-width: 625px;
         line-height: 1.4em;
@@ -353,28 +373,35 @@ $primary: #409eff;
     }
   }
 }
+
 .box-min-table {
+
   tr,
   td,
   th {
     min-width: 24px;
   }
 }
+
 .g-clearfix {
-  &:after,
-  &:before {
+
+  &::after,
+  &::before {
     clear: both;
     content: " ";
     display: table;
   }
 }
+
 .g-pull-left {
   float: left;
 }
+
 .g-pull-right {
   float: right;
   cursor: pointer;
 }
+
 .g-tip-text {
   color: #999;
 }

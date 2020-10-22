@@ -154,6 +154,7 @@ export default {
 
 <style scoped lang="scss">
 .ui-cascader__box {
+
   .cataract {
     display: block;
     position: absolute;
@@ -168,11 +169,14 @@ export default {
     height: 36px;
     position: relative;
     z-index: 9;
+
     &:hover {
+
       .check-item {
         background-color: #f8f8f8;
       }
     }
+
     .item-select {
       width: 100%;
       height: 100%;
@@ -191,9 +195,11 @@ export default {
     height: 36px;
     line-height: 36px;
     font-size: 14px;
+
     &.disabled {
       cursor: not-allowed;
     }
+
     &:hover {
       background-color: #f8f8f8;
     }
@@ -201,6 +207,7 @@ export default {
     &.active {
       color: #598fe6;
       background-color: #f8f8f8;
+
       .el-icon-arrow-right {
         color: #598fe6 !important;
       }
