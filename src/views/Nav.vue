@@ -69,6 +69,11 @@ export default {
           url: '/#/common/editor'
         },
         {
+          label: '表格拖拽排序',
+          checked: true,
+          url: '#/common/drag_table'
+        },
+        {
           label: '头条上传组件（tab内嵌套tab，动态控制）',
           checked: false
         },

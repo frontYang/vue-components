@@ -2,13 +2,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
-import Index from '@/views/Index'
+// import Index from '@/views/Index'
 import Home from '@/views/Home'
 
 // 广告投放
 import Common from './modules/common/index'
 
 Vue.use(Router)
+
+export let routerAll =  [Common]
+
 
 export default new Router({
   // mode: 'history',
@@ -25,18 +28,7 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      redirect: '/index',
-      children: [
-        {
-          path: '/index',
-          name: 'index',
-          component: Index,
-          meta: {
-            title: '首页'
-          }
-        },
-        Common
-      ]
-    }
+      children: routerAll
+    },    
   ]
 })

@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'Common',
   components: {},
   data() {
     return {}

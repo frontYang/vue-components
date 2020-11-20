@@ -43,17 +43,15 @@ Vue.use(ElementUI)
 Vue.use(VueAwesomeSwiper)
 
 // 判断登录状态
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   const token = localStorage.getItem('token') || null
   const username = localStorage.getItem('username') || null
 
   if (token == null && to.path !== '/login') {
     next({ path: '/login' })
   } else {
-    store.commit('setUser', {
-      username: username
-    })
-
+    store.commit('setUser', { username: username })
+    // await store.dispatch('permission/generateRoutes')
     next()
   }
 })

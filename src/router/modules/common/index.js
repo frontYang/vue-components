@@ -1,4 +1,5 @@
-import Common from '@/views/Common/Index'
+// import Common from '@/views/Common/Index'
+import Home from '@/views/Home'
 import Dragtime from '@/views/Common/Dragtime/Index'
 import Dragtime2 from '@/views/Common/Dragtime2/Index'
 import VideoPlay from '@/views/Common/VideoPlay/Index'
@@ -10,19 +11,20 @@ import TreeSearch from '@/views/Common/TreeSearch/Index'
 import CalendarCustom from '@/views/Common/CalendarCustom/Index'
 import Editor from '@/views/Common/Editor/Index'
 import H5 from '@/views/Common/H5/Index'
+import DragTable from '@/views/Common/DragTable/Index'
 import UploadGroup from '@/views/Common/UploadGroup/Index'
 
 // 子路由
 export default {
   path: '/common',
   name: 'common',
-  component: Common,
+  component: Home,
   meta: {
     title: 'Common'
   },
   children: [
     {
-      path: '/common/dragtime',
+      path: 'dragtime',
       name: 'dragtime',
       component: Dragtime,
       meta: {
@@ -30,7 +32,7 @@ export default {
       }
     },
     {
-      path: '/common/dragtime2',
+      path: 'dragtime2',
       name: 'dragtime2',
       component: Dragtime2,
       meta: {
@@ -38,7 +40,7 @@ export default {
       }
     },
     {
-      path: '/common/cascader',
+      path: 'cascader',
       name: 'cascader',
       component: Cascader,
       meta: {
@@ -46,7 +48,7 @@ export default {
       }
     },
     {
-      path: '/common/cascader2',
+      path: 'cascader2',
       name: 'cascader2',
       component: Cascader2,
       meta: {
@@ -54,7 +56,7 @@ export default {
       }
     },
     {
-      path: '/common/videoplay',
+      path: 'videoplay',
       name: 'videoplay',
       component: VideoPlay,
       meta: {
@@ -62,7 +64,7 @@ export default {
       }
     },
     {
-      path: '/common/imagescroll',
+      path: 'imagescroll',
       name: 'imagescroll',
       component: ImageScroll,
       meta: {
@@ -70,7 +72,7 @@ export default {
       }
     },
     {
-      path: '/common/selectdrop',
+      path: 'selectdrop',
       name: 'selectdrop',
       component: SelectDrop,
       meta: {
@@ -78,7 +80,7 @@ export default {
       }
     },
     {
-      path: '/common/treesearch',
+      path: 'treesearch',
       name: 'treesearch',
       component: TreeSearch,
       meta: {
@@ -86,7 +88,7 @@ export default {
       }
     },
     {
-      path: '/common/calendar_custom',
+      path: 'calendar_custom',
       name: 'calendar_custom',
       component: CalendarCustom,
       meta: {
@@ -94,7 +96,15 @@ export default {
       }
     },
     {
-      path: '/common/editor',
+      path: 'drag_table',
+      name: 'drag_table',
+      component: DragTable,
+      meta: {
+        title: '表格拖拽排序'
+      }
+    },
+    {
+      path: 'editor',
       name: 'editor',
       component: Editor,
       meta: {
@@ -102,7 +112,7 @@ export default {
       }
     },
     {
-      path: '/common/h5',
+      path: 'h5',
       name: 'h5',
       component: H5,
       meta: {
@@ -110,7 +120,7 @@ export default {
       }
     },
     {
-      path: '/common/upload_group',
+      path: 'upload_group',
       name: 'UploadGroup',
       component: UploadGroup,
       meta: {

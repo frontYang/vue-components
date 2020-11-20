@@ -1,26 +1,16 @@
 <template>
-  <div class="app-wrapper">
-    <Nav />
-    <div :class="{hasTagsView:true}" class="main-container">
-      <div :class="{'fixed-header':false}">
-        <tags-view />
-      </div>
-      <app-main />
-    </div>
-  </div>
+  <section class="app-main">
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive :include="cachedViews">
+        <router-view :key="key" />
+      </keep-alive>
+    </transition>
+  </section>
 </template>
 
 <script>
-import Nav from './Nav'
-import AppMain from './AppMain'
-import TagsView from './TagsView/index'
 export default {
-  name: 'Home',
-  components: {
-    Nav,
-    AppMain,
-    TagsView
-  },
+  name: 'AppMain',
   computed: {
     cachedViews() {
       return this.$store.state.tagsView.cachedViews
